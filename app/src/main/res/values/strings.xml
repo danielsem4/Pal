@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Pal</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="don_t_have_an_account_sign_up">don\'t have an account? sign up</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="or_sign_in_with">__________ or sign in with __________</string>
 </resources>

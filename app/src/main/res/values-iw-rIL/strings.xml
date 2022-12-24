@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pal</string>
+    <string name="login">התחברות</string>
+    <string name="email">דוא"ל</string>
+    <string name="password">סיסמה</string>
+    <string name="don_t_have_an_account_sign_up">אין לך משתמש? הרשם כאן</string>
+    <string name="forgot_password">שכחתי סיסמה?</string>
+    <string name="or_sign_in_with">__________התחבר עם__________</string>
+</resources>
