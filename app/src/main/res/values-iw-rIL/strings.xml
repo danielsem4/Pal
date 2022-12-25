@@ -7,4 +7,12 @@
     <string name="don_t_have_an_account_sign_up">אין לך משתמש? הרשם כאן</string>
     <string name="forgot_password">שכחתי סיסמה?</string>
     <string name="or_sign_in_with">__________התחבר עם__________</string>
+    <string name="dog">כלב</string>
+    <string name="cat">חתול</string>
+    <string name="entry_slogan">מחפשים לאמץ חיית מחמד?</string>
+    <string name="sign_in">הרשם</string>
+    <string name="repeat_password">חזור על סיסמה</string>
+    <string name="name">שם</string>
+    <string name="phone_number">מספר פלאפון</string>
+    <string name="welcome_to_pal">ברוכים הבאים ל-Pal</string>
 </resources>

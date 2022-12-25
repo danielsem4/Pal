@@ -6,4 +6,12 @@
     <string name="don_t_have_an_account_sign_up">don\'t have an account? sign up</string>
     <string name="forgot_password">forgot password?</string>
     <string name="or_sign_in_with">__________ or sign in with __________</string>
+    <string name="dog">Dog</string>
+    <string name="cat">Cat</string>
+    <string name="entry_slogan">How about adopting a pet?</string>
+    <string name="sign_in">Sign-in</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="name">name</string>
+    <string name="phone_number">phone number</string>
+    <string name="welcome_to_pal">Welcome to Pal</string>
 </resources>
