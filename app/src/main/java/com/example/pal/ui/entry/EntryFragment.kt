@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.pal.R
 import com.example.pal.databinding.FragmentEntryBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
@@ -19,6 +21,17 @@ class EntryFragment : Fragment() {
     ): View? {
 
         binding = FragmentEntryBinding.inflate(inflater, container, false)
+
+        // on press moving to the cat section (Home screen with cats for adoption)
+        binding.catSection.setOnClickListener{
+
+        }
+
+        // on press moving to the dog section (Home screen with dogs for adoption)
+        binding.dogSection.setOnClickListener {
+
+        }
+
         return binding.root
 
     }
