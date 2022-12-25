@@ -10,4 +10,9 @@
         android:name="com.example.pal.ui.entry.EntryFragment"
         android:label="fragment_entry"
         tools:layout="@layout/fragment_entry" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.pal.ui.signin.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

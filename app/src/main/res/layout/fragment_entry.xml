@@ -3,105 +3,26 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background4"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.entry.EntryFragment">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:src="@drawable/logo"
-        android:id="@+id/login_logo_btn"
-        android:layout_gravity="center"/>
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/emailLogin"
-        android:hint="@string/email"
-        android:textColorHint="@color/white"
-        android:background="@drawable/circle"
-        android:textColor="@color/white"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:drawablePadding="20dp"
-        android:layout_marginTop="0dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/passwordLogin"
-        android:hint="@string/password"
-        android:textColorHint="@color/white"
-        android:background="@drawable/circle"
-        android:textColor="@color/white"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:drawableStart="@drawable/ic_baseline_lock_24"
-        android:drawablePadding="20dp"
-        android:layout_marginTop="10dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:id="@+id/loginbtn"
+        android:id="@+id/catbtn"
         android:text="@string/login"
         android:layout_gravity="center"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:textSize="16sp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/forgot_password"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/or_sign_in_with"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:id="@+id/or_sign_in_with"/>
-
-    <LinearLayout
+    <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/google"
-            android:id="@+id/google_btn"/>
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/facebook"
-            android:id="@+id/facebook_btn"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/don_t_have_an_account_sign_up"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:id="@+id/signup_btn"
-        android:layout_gravity="center"/>
+        android:layout_margin="10dp"
+        android:id="@+id/dogbtn"
+        android:text="@string/login"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>
