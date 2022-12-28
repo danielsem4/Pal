@@ -1,5 +1,6 @@
 package com.example.pal.ui.entry
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.databinding.FragmentEntryBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
+
 
 class EntryFragment : Fragment() {
 
@@ -22,14 +24,14 @@ class EntryFragment : Fragment() {
 
         binding = FragmentEntryBinding.inflate(inflater, container, false)
 
-        // on press moving to the cat section (Home screen with cats for adoption)
-        binding.catSection.setOnClickListener{
-
-        }
-
         // on press moving to the dog section (Home screen with dogs for adoption)
         binding.dogSection.setOnClickListener {
+            findNavController().navigate(R.id.action_entryFragment_to_homeActivity2)
+        }
 
+        // on press moving to the cat section (Home screen with cats for adoption)
+        binding.catSection.setOnClickListener{
+            findNavController().navigate(R.id.action_entryFragment_to_homeActivity2)
         }
 
         return binding.root
