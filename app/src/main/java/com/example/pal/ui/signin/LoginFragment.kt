@@ -23,6 +23,12 @@ class LoginFragment : Fragment() {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        // user enter the application without an account
+        binding.guestBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
+        }
+
+
         // users without account will press here and move to the sign up page
         binding.signupBtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment4)
