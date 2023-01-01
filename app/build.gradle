@@ -42,6 +42,14 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
+    //auth
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    //fire store
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    //firebase corutine support
+    //implementation 'org.jetbrains.kotlinx:kotlinx=corutines-play-services:1.5.1'
+
     // navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
