@@ -1,16 +1,16 @@
-package com.example.pal.ui.home
+package com.example.pal.ui.home.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pal.databinding.FragmentProfileBinding
+import com.example.pal.databinding.FragmentFavoritesBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-class ProfileFragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
-    private var binding : FragmentProfileBinding by autoCleared()
+    private var binding : FragmentFavoritesBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,7 +18,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
         return binding.root
 

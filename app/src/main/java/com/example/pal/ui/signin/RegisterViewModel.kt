@@ -10,19 +10,19 @@ import kotlinx.coroutines.launch
 @Suppress("UNCHECKED_CAST")
 class RegisterViewModel(private val repository:AuthRepository):ViewModel() {
 
-    private val _userRegistrationStatus=MutableLiveData<Resource<User>>()
+    private val _userRegistrationStatus = MutableLiveData<Resource<User>>()
 
-    val userRegistrationStatus:LiveData<Resource<User>> =_userRegistrationStatus
+    val userRegistrationStatus:LiveData<Resource<User>> = _userRegistrationStatus
 
-    fun createUser(userName:String,userEmail:String,userPhone:String,userPass:String){
-        val error=if(userEmail.isNotEmpty()||userPass.isNotEmpty()||userName.isNotEmpty())
+    fun createUser(userName: String,userEmail: String,userPhone: String,userPass: String){
+        val error = if(userEmail.isNotEmpty() || userPass.isNotEmpty() || userName.isNotEmpty())
             "empty String"
         else if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches())
             "Not a valid Email"
         else null
 
         error?.let {
-            _userRegistrationStatus.postValue(Resource.Error(it))//postValue and not valu because back thread
+            _userRegistrationStatus.postValue(Resource.Error(it))// postValue and not value for the back thread
         }
         _userRegistrationStatus.postValue(Resource.Loading())
         viewModelScope.launch {
@@ -36,7 +36,5 @@ class RegisterViewModel(private val repository:AuthRepository):ViewModel() {
             return RegisterViewModel(repo) as T
         }
     }
-
-
 
 }

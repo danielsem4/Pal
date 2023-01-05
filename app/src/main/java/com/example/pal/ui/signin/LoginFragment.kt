@@ -64,14 +64,13 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+
         viewModel.currentUser.observe(viewLifecycleOwner){
             when (it) { // we need to add the progress bar
-                is Resource.Success -> {//if the user is still login and didn't signout
+                is Resource.Success -> { //if the user is still login and didn't sign-out
                     Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
                     //findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
                 }
-
-
             }
         }
 
