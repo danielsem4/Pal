@@ -59,6 +59,5 @@ class HomeFragment : Fragment() {
         HomeDataItem.HomeItem(name = "Tedi", description = "sdfalkjhfsda", image = R.drawable.test),
         HomeDataItem.HomeItem(name = "Tedi", description = "sdfalkjhfsda", image = R.drawable.test),
         HomeDataItem.HomeItem(name = "tedi", description = "sdfalkjhfsda", image = R.drawable.test)
-
     )
 }
