@@ -41,7 +41,7 @@
         android:id="@+id/dog_section"
         android:layout_height="wrap_content"
         android:background="@color/coffee"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         app:cardCornerRadius="20dp">
 
 
@@ -83,7 +83,7 @@
         android:id="@+id/cat_section"
         android:layout_height="wrap_content"
         android:background="@color/coffee"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         app:cardCornerRadius="20dp">
 
         <LinearLayout

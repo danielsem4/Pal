@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background2"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.home.SearchFragment">
+    tools:context=".ui.home.search.SearchFragment">
 
     <TextView
         android:layout_width="match_parent"

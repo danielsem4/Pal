@@ -1,17 +1,16 @@
-package com.example.pal.ui.home
+package com.example.pal.ui.home.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pal.databinding.FragmentSearchBinding
-
+import com.example.pal.databinding.FragmentSettingsBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-class SearchFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
-    private var binding : FragmentSearchBinding by autoCleared()
+    private var binding : FragmentSettingsBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +18,12 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+
+        // the sign out btn
+        binding.signOutBtn.setOnClickListener {
+
+        }
 
         return binding.root
 
