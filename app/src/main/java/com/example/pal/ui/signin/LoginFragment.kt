@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.pal.R
-import com.example.pal.data.repository.FirebaseImpl.AuthRepositoryFirebase
-import com.example.pal.databinding.FragmentEntryBinding
+import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentLoginBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
@@ -53,14 +53,26 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.userSignInStatus.observe(viewLifecycleOwner) {
-            when (it) { // we need to add the progress bar
+            when (it) {
+
+                // when the user status is loading we will show the loading anim ui
+                is Resource.Loading -> {
+                    binding.loginUi.isVisible = false
+                    binding.loginLoading.isVisible = true
+                    Toast.makeText(requireContext(),"Loading",Toast.LENGTH_SHORT).show()
+                }
+
+                // when the user status is success we will move to the next page and reset the ui
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
+                    binding.loginUi.isVisible = true
+                    binding.loginLoading.isVisible = false
                 }
+
+                // if the user status is failed we will pop up the message and wont change the ui
                 is Resource.Error ->{
                     Toast.makeText(requireContext(),it.message,Toast.LENGTH_SHORT).show()
-
                 }
             }
         }
@@ -73,7 +85,5 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
-
     }
 }

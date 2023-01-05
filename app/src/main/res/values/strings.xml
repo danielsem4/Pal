@@ -28,4 +28,5 @@
     <string name="home_description">the pets are waiting for you!</string>
     <string name="settings">Settings</string>
     <string name="sing_out">sing-out</string>
+    <string name="loading">Loading</string>
 </resources>

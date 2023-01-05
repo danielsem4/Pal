@@ -6,20 +6,25 @@ import com.example.pal.data.repository.AuthRepository
 import il.co.syntax.myapplication.util.Resource
 import kotlinx.coroutines.launch
 
-@Suppress("UNCHECKED_CAST")
 class LoginViewModel(private val repository: AuthRepository): ViewModel() {
 
-    private val _userSignInStatus = MutableLiveData<Resource<User>>() // follow after the register state
+    // the user status
+    private val _userSignInStatus = MutableLiveData<Resource<User>>()
+
+    // expose access to the user status
     val userSignInStatus: LiveData<Resource<User>> = _userSignInStatus
 
-    private val _currentUser = MutableLiveData<Resource<User>>()// the current user if someone is logged in
+    // the current user if someone is logged in
+    private val _currentUser = MutableLiveData<Resource<User>>()
+
+    // expose access to the user
     val currentUser: LiveData<Resource<User>> = _currentUser
 
 
     init {
         viewModelScope.launch {
-            _currentUser.postValue(Resource.Loading())
-            _currentUser.postValue(repository.currentUser()) // run it on back thread
+            _currentUser.postValue(Resource.Loading()) // started to load the user
+            _currentUser.postValue(repository.currentUser())
         }
     }
 
@@ -28,18 +33,17 @@ class LoginViewModel(private val repository: AuthRepository): ViewModel() {
             _userSignInStatus.postValue(Resource.Error("Empty email or password\n please try again"))
 
         else{
-            _userSignInStatus.postValue(Resource.Loading())
+            _userSignInStatus.postValue(Resource.Loading()) // started to load the user
             viewModelScope.launch {
-                val loginResult = repository.login(userEmail,userPass)
+                val loginResult = repository.login(userEmail, userPass)
                 _userSignInStatus.postValue(loginResult)
             }
         }
-
-
     }
 
-
-    class LoginViewModelFactory(private val repo:AuthRepository): ViewModelProvider.NewInstanceFactory(){
+    // factory method
+    @Suppress("UNCHECKED_CAST")
+    class LoginViewModelFactory(private val repo:AuthRepository) : ViewModelProvider.NewInstanceFactory(){
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return LoginViewModel(repo) as T
         }
