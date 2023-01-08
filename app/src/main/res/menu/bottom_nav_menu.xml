@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_baseline_search_24"/>
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/SettingsFragment"
         android:title="@string/settings"
         android:icon="@drawable/ic_baseline_settings_24"/>
 

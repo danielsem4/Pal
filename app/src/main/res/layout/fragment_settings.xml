@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background2"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.home.settings.SettingsFragment">
@@ -9,15 +10,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/logged_in_user_settings"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/general_settings"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
+
+            <include
+                layout="@layout/settings_btns"
+                android:id="@+id/settings_contact_us"/>
+
+            <include
+                layout="@layout/settings_btns"
+                android:id="@+id/settings_terms"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:id="@+id/general_profile"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
+
+            <include
+                layout="@layout/settings_btns"
+                android:id="@+id/settings_change_password"/>
+
+            <include
+                layout="@layout/settings_btns"
+                android:id="@+id/settings_delete_user"/>
+
+            <include
+                layout="@layout/settings_btns"
+                android:id="@+id/settings_sign_out"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/guest_settings"
+        android:visibility="gone"
         android:orientation="vertical">
 
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sing_out"
+            android:text="@string/login"
             android:layout_gravity="center"
-            android:id="@+id/sign_out_btn"/>
+            android:id="@+id/settings_log_in_btn"/>
 
 
     </LinearLayout>
