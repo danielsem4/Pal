@@ -16,14 +16,39 @@
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/SettingsFragment"
         android:name="com.example.pal.ui.home.settings.SettingsFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_settings" />
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.pal.ui.home.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.pal.ui.home.settings.change_password.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.example.pal.ui.home.settings.contact_us.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.example.pal.ui.home.settings.terms.TermsFragment"
+        android:label="fragment_terms"
+        tools:layout="@layout/fragment_terms" />
 
 </navigation>
