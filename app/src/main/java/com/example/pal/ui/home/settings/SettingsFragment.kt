@@ -5,19 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.pal.R
+import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentSettingsBinding
 import com.example.pal.ui.HomeActivity
-import com.google.android.material.bottomappbar.BottomAppBar.MenuAlignmentMode
+import com.example.pal.ui.signin.LoginViewModel
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
 class SettingsFragment : Fragment() {
 
     private var binding : FragmentSettingsBinding by autoCleared()
+
+    private val viewModel : LoginViewModel by viewModels { LoginViewModel.LoginViewModelFactory(AuthRepositoryFirebase())}
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -91,7 +96,9 @@ class SettingsFragment : Fragment() {
 
         // sign out button
         binding.settingsSignOut.settingsBtn.setOnClickListener {
-
+            viewModel.signOut()
+            findNavController().navigate(R.id.action_SettingsFragment_to_mainActivity)
+            Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
         }
 
 
