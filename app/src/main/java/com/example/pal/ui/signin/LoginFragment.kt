@@ -78,10 +78,23 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.currentUser.observe(viewLifecycleOwner){
-            when (it) { // we need to add the progress bar
+            when (it) {
                 is Resource.Success -> { //if the user is still login and didn't sign-out
                     Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
-                    //findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
+                    binding.loginUi.isVisible = true
+                    binding.loginLoading.isVisible = false
+                }
+
+                is Resource.Loading -> {
+                    binding.loginUi.isVisible = false
+                    binding.loginLoading.isVisible = true
+                    Toast.makeText(requireContext(),"Loading",Toast.LENGTH_SHORT).show()
+                }
+
+                // if the user status is failed we will pop up the message and wont change the ui
+                is Resource.Error ->{
+                    Toast.makeText(requireContext(),it.message,Toast.LENGTH_SHORT).show()
                 }
             }
         }

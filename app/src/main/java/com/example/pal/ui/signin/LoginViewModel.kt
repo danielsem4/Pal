@@ -41,6 +41,10 @@ class LoginViewModel(private val repository: AuthRepository): ViewModel() {
         }
     }
 
+    fun signOut() {
+        repository.logout()
+    }
+
     // factory method
     @Suppress("UNCHECKED_CAST")
     class LoginViewModelFactory(private val repo:AuthRepository) : ViewModelProvider.NewInstanceFactory(){
