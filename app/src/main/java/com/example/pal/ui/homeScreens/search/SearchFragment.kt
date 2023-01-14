@@ -1,16 +1,17 @@
-package com.example.pal.ui.home.favorites
+package com.example.pal.ui.homeScreens.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pal.databinding.FragmentFavoritesBinding
+import com.example.pal.databinding.FragmentSearchBinding
+
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-class FavoritesFragment : Fragment() {
+class SearchFragment : Fragment() {
 
-    private var binding : FragmentFavoritesBinding by autoCleared()
+    private var binding : FragmentSearchBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,7 +19,7 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
 
         return binding.root
 

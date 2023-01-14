@@ -3,60 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.pal.ui.home.HomeFragment"
+        android:name="com.example.pal.ui.homeScreens.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.pal.ui.home.favorites.FavoritesFragment"
+        android:name="com.example.pal.ui.homeScreens.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/SettingsFragment"
-        android:name="com.example.pal.ui.home.settings.SettingsFragment"
+        android:name="com.example.pal.ui.homeScreens.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/action_settingsFragment_to_contactUsFragment"
-            app:destination="@id/contactUsFragment" />
+            android:id="@+id/action_SettingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_settingsFragment_to_termsFragment"
-            app:destination="@id/termsFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_changePasswordFragment"
+            android:id="@+id/action_SettingsFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
         <action
-            android:id="@+id/action_SettingsFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_SettingsFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
+        <action
+            android:id="@+id/action_SettingsFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.pal.ui.home.search.SearchFragment"
+        android:name="com.example.pal.ui.homeScreens.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.example.pal.ui.home.settings.change_password.ChangePasswordFragment"
+        android:name="com.example.pal.ui.homeScreens.settings.change_password.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/contactUsFragment"
-        android:name="com.example.pal.ui.home.settings.contact_us.ContactUsFragment"
+        android:name="com.example.pal.ui.homeScreens.settings.contact_us.ContactUsFragment"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/termsFragment"
-        android:name="com.example.pal.ui.home.settings.terms.TermsFragment"
+        android:name="com.example.pal.ui.homeScreens.settings.terms.TermsFragment"
         android:label="fragment_terms"
         tools:layout="@layout/fragment_terms" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.pal.ui.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.pal.ui.signin.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/entryFragment"
+        android:name="com.example.pal.ui.entry.EntryFragment"
+        android:label="fragment_entry"
+        tools:layout="@layout/fragment_entry" >
+        <action
+            android:id="@+id/action_entryFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.pal.ui.signin.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+    </fragment>
 
 </navigation>

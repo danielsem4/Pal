@@ -31,4 +31,6 @@
     <string name="loading">Loading</string>
     <string name="welcome_dear">Welcome dear</string>
     <string name="general">General</string>
+    <string name="test">test</string>
+    <string name="years_old">Years old</string>
 </resources>

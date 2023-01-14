@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentLoginBinding
+import com.example.pal.ui.MainActivity
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
 
@@ -30,6 +31,10 @@ class LoginFragment : Fragment() {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        // the bottom menu ref, and set the manu to be invisible every time we come back to this screen
+        val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        navigationBar.isVisible = false
+
         // user enter the application without an account
         binding.guestBtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
@@ -38,7 +43,7 @@ class LoginFragment : Fragment() {
 
         // users without account will press here and move to the sign up page
         binding.signupBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_signupFragment4)
+            findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
         binding.loginBtn.setOnClickListener{
 
@@ -84,17 +89,6 @@ class LoginFragment : Fragment() {
                     findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
                     binding.loginUi.isVisible = true
                     binding.loginLoading.isVisible = false
-                }
-
-                is Resource.Loading -> {
-                    binding.loginUi.isVisible = false
-                    binding.loginLoading.isVisible = true
-                    Toast.makeText(requireContext(),"Loading",Toast.LENGTH_SHORT).show()
-                }
-
-                // if the user status is failed we will pop up the message and wont change the ui
-                is Resource.Error ->{
-                    Toast.makeText(requireContext(),it.message,Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -1,15 +1,16 @@
-package com.example.pal.ui.home.settings.change_password
+package com.example.pal.ui.homeScreens.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pal.databinding.FragmentChangePasswordBinding
+import com.example.pal.databinding.FragmentFavoritesBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-class ChangePasswordFragment : Fragment(){
-    private var binding : FragmentChangePasswordBinding by autoCleared()
+class FavoritesFragment : Fragment() {
+
+    private var binding : FragmentFavoritesBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,7 +18,7 @@ class ChangePasswordFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
         return binding.root
 

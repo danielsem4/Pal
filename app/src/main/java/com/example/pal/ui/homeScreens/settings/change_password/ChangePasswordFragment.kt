@@ -1,15 +1,15 @@
-package com.example.pal.ui.home.settings.contact_us
+package com.example.pal.ui.homeScreens.settings.change_password
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pal.databinding.FragmentContactUsBinding
+import com.example.pal.databinding.FragmentChangePasswordBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-class ContactUsFragment : Fragment() {
-    private var binding : FragmentContactUsBinding by autoCleared()
+class ChangePasswordFragment : Fragment(){
+    private var binding : FragmentChangePasswordBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,7 +17,7 @@ class ContactUsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentContactUsBinding.inflate(inflater, container, false)
+        binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
 
         return binding.root
 

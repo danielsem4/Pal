@@ -1,4 +1,4 @@
-package com.example.pal.ui.home.settings
+package com.example.pal.ui.homeScreens.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentSettingsBinding
-import com.example.pal.ui.HomeActivity
+import com.example.pal.ui.MainActivity
 import com.example.pal.ui.signin.LoginViewModel
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
@@ -37,7 +37,7 @@ class SettingsFragment : Fragment() {
         val rightDrawable = getDrawable(requireContext(), R.drawable.ic_baseline_arrow_forward_ios_24)
 
         // the bottom menu ref, and set the manu to be visible every time we come back to this screen
-        val navigationBar = (activity as HomeActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = true
 
         // set the text for every btn in the settings
@@ -71,21 +71,21 @@ class SettingsFragment : Fragment() {
         // terms button
         binding.settingsTerms.settingsBtn.setOnClickListener {
 
-            findNavController().navigate(R.id.action_settingsFragment_to_termsFragment)
+            findNavController().navigate(R.id.action_SettingsFragment_to_termsFragment)
             navigationBar.isVisible = false
         }
 
         // contact us button
         binding.settingsContactUs.settingsBtn.setOnClickListener {
 
-            findNavController().navigate(R.id.action_settingsFragment_to_contactUsFragment)
+            findNavController().navigate(R.id.action_SettingsFragment_to_contactUsFragment)
             navigationBar.isVisible = false
         }
 
         // change password button
         binding.settingsChangePassword.settingsBtn.setOnClickListener {
 
-            findNavController().navigate(R.id.action_settingsFragment_to_changePasswordFragment)
+            findNavController().navigate(R.id.action_SettingsFragment_to_changePasswordFragment)
             navigationBar.isVisible = false
         }
 
@@ -97,13 +97,11 @@ class SettingsFragment : Fragment() {
         // sign out button
         binding.settingsSignOut.settingsBtn.setOnClickListener {
             viewModel.signOut()
-            findNavController().navigate(R.id.action_SettingsFragment_to_mainActivity)
+            findNavController().navigate(R.id.action_SettingsFragment_to_loginFragment)
             Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
         }
 
-
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

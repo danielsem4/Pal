@@ -1,15 +1,15 @@
-package com.example.pal.ui.home.settings.terms
+package com.example.pal.ui.homeScreens.settings.contact_us
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pal.databinding.FragmentTermsBinding
+import com.example.pal.databinding.FragmentContactUsBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-class TermsFragment : Fragment() {
-    private var binding : FragmentTermsBinding by autoCleared()
+class ContactUsFragment : Fragment() {
+    private var binding : FragmentContactUsBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,7 +17,7 @@ class TermsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentTermsBinding.inflate(inflater, container, false)
+        binding = FragmentContactUsBinding.inflate(inflater, container, false)
 
         return binding.root
 
