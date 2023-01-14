@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentSignupBinding
+import com.example.pal.ui.MainActivity
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
 
@@ -33,6 +34,7 @@ class SignupFragment : Fragment() {
 
         binding = FragmentSignupBinding.inflate(inflater, container, false)
 
+        // pass the data to the ViewModel
         binding.signInBtn.setOnClickListener{
             viewModel.createUser(
                 binding.nameSignIn.text.toString(),
@@ -63,7 +65,7 @@ class SignupFragment : Fragment() {
                 // when the user status is success we will move to the next page and reset the ui
                 is Resource.Success ->{
                     Toast.makeText(requireContext(),"Registration successful",Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_signupFragment_to_entryFragment2)
+                    findNavController().navigate(R.id.action_signupFragment_to_entryFragment)
                     binding.signUpUi.isVisible = true
                     binding.signUpLoading.isVisible = false
                 }

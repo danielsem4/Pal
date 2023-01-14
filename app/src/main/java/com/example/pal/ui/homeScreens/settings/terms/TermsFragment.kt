@@ -1,17 +1,15 @@
-package com.example.pal.ui.home.search
+package com.example.pal.ui.homeScreens.settings.terms
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pal.databinding.FragmentSearchBinding
-
+import com.example.pal.databinding.FragmentTermsBinding
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-class SearchFragment : Fragment() {
-
-    private var binding : FragmentSearchBinding by autoCleared()
+class TermsFragment : Fragment() {
+    private var binding : FragmentTermsBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +17,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding = FragmentTermsBinding.inflate(inflater, container, false)
 
         return binding.root
 
