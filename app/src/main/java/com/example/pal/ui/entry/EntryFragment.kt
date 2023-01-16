@@ -26,18 +26,27 @@ class EntryFragment : Fragment() {
 
         binding = FragmentEntryBinding.inflate(inflater, container, false)
 
+        // the bundle i will sent to the next fragments
+        val bundle = Bundle()
+
         // the bottom menu ref, and set the manu to be invisible every time we come back to this screen
         val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = false
 
         // on press moving to the dog section (Home screen with dogs for adoption)
         binding.dogSection.setOnClickListener {
-            findNavController().navigate(R.id.action_entryFragment_to_homeFragment)
+
+            //set the animal type to dog
+            bundle.putString("animal", "Dog")
+            findNavController().navigate(R.id.action_entryFragment_to_homeFragment, bundle)
         }
 
         // on press moving to the cat section (Home screen with cats for adoption)
         binding.catSection.setOnClickListener{
-            findNavController().navigate(R.id.action_entryFragment_to_homeFragment)
+
+            //set the animal type to cat
+            bundle.putString("animal", "Cat")
+            findNavController().navigate(R.id.action_entryFragment_to_homeFragment, bundle)
         }
 
         return binding.root

@@ -10,6 +10,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.pal.R
 import com.example.pal.data.repository.Firebase.PetsRepositoryFirebase
 import com.example.pal.databinding.FragmentHomeBinding
@@ -25,6 +27,7 @@ class HomeFragment : Fragment() {
         HomeViewModel.HomeViewModelFactory(PetsRepositoryFirebase())
     }
 
+    private var imageList = ArrayList<SlideModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +37,21 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        // set the 5 slider images and there titles
+        imageList.add(SlideModel(R.drawable.home_slider1, "Our Angels"))
+        imageList.add(SlideModel(R.drawable.home_slider2, "Our Angels"))
+        imageList.add(SlideModel(R.drawable.home_slider3, "Our Angels"))
+        imageList.add(SlideModel(R.drawable.home_slider4, "Our Angels"))
+        imageList.add(SlideModel(R.drawable.home_slider5, "Our Angels"))
+
+        // fill the home slider with the images
+        binding.imageHomeSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
+
         // the bottom menu ref, and set the manu to be visible every time we come back to this screen
         val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = true
 
-        viewModel.getPets("Dog")
-
-        binding.test.movementMethod = ScrollingMovementMethod()
+        viewModel.getPets(arguments?.getString("animal").toString())
 
         return binding.root
 

@@ -22,8 +22,6 @@
     <string name="facebook">Facebook</string>
     <string name="guest">Guest</string>
     <string name="guest_describe">You should sign-in to make your own favorite list</string>
-    <string name="dog_name">Kimi</string>
-    <string name="pet_description">sdafasdfsadfsdfasadf</string>
     <string name="home_title">our dogs for adoption</string>
     <string name="home_description">the pets are waiting for you!</string>
     <string name="settings">Settings</string>
@@ -33,4 +31,5 @@
     <string name="general">General</string>
     <string name="test">test</string>
     <string name="years_old">Years old</string>
+    <string name="find_your_forever_friend_through_adoption">Find your forever friend through adoption.</string>
 </resources>
