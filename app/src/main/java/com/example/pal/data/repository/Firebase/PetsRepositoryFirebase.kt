@@ -17,14 +17,18 @@ class PetsRepositoryFirebase : PetsRepository {
     private val petsRef = FirebaseFirestore.getInstance().collection("pets")
 
 
+    // get pets filtered by animal type
     override suspend fun getPets(animal: String) : Resource<List<Pet>> {
 
+        // the calls wrapped with safe call to catch exceptions
         return safeCall {
             // filter and get only the dogs / cats
             val query = petsRef.whereEqualTo("animal", animal)
             val snapshot = query.get().await()
 
             val petsList = mutableListOf<Pet>()
+
+            // iterate on the snapshot i got and convert it to Pet object and push it to the petsList
             for (doc in snapshot) {
                 val pet = doc.toObject(Pet::class.java)
                 petsList.add(pet)

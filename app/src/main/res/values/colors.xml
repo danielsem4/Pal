@@ -13,5 +13,6 @@
     <color name="ceramic">#CDCDC0</color>
     <color name="latte">#DDBC95</color>
     <color name="coffee">#a87954</color>
+    <color name="light_coffee">#CC9D79</color>
     <color name="brown">#B86D1F</color>
 </resources>
