@@ -10,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/logged_in_user_settings"
-        android:visibility="visible"
+        android:id="@+id/settings"
         android:orientation="vertical">
 
         <LinearLayout
@@ -46,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
-            android:id="@+id/general_profile"
+            android:visibility="visible"
+            android:id="@+id/user"
             android:orientation="vertical">
 
             <TextView
@@ -70,26 +70,30 @@
                 layout="@layout/settings_btns"
                 android:id="@+id/settings_sign_out"/>
 
-
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/guest_settings"
-        android:visibility="gone"
-        android:orientation="vertical">
-
-
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:layout_gravity="center"
-            android:id="@+id/settings_log_in_btn"/>
+            android:layout_marginTop="45dp"
+            android:visibility="gone"
+            android:id="@+id/guest"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
+
+            <include
+                layout="@layout/settings_btns"
+                android:id="@+id/settings_log_in"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

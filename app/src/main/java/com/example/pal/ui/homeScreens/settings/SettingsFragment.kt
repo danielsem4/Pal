@@ -9,12 +9,14 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentSettingsBinding
 import com.example.pal.ui.MainActivity
+import com.example.pal.ui.MainActivityViewModel
 import com.example.pal.ui.signin.LoginViewModel
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
@@ -22,7 +24,12 @@ class SettingsFragment : Fragment() {
 
     private var binding : FragmentSettingsBinding by autoCleared()
 
-    private val viewModel : LoginViewModel by viewModels { LoginViewModel.LoginViewModelFactory(AuthRepositoryFirebase())}
+    private val viewModel : LoginViewModel by viewModels {
+        LoginViewModel.LoginViewModelFactory(AuthRepositoryFirebase())
+    }
+
+    // the activity viewModel
+    private val activityViewModel : MainActivityViewModel by activityViewModels()
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -40,32 +47,21 @@ class SettingsFragment : Fragment() {
         val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = true
 
-        // set the text for every btn in the settings
+
+        // set the buttons that will appear always in this page
+
         binding.settingsTerms.settingsBtnText.text = "  Terms"
         binding.settingsContactUs.settingsBtnText.text = "  Contact Us"
-        binding.settingsChangePassword.settingsBtnText.text = "  Change password"
-        binding.settingsDeleteUser.settingsBtnText.text = "  Delete User"
-        binding.settingsSignOut.settingsBtnText.text = "  Sign out"
 
-        // set the drawable icons for every btn in the settings
+
+        // Contact Us
         binding.settingsContactUs.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
             getDrawable(requireContext(), R.drawable.ic_baseline_alternate_email_24),
             null, rightDrawable, null)
 
+        // Terms
         binding.settingsTerms.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
             getDrawable(requireContext(), R.drawable.ic_baseline_terms_file_24),
-            null, rightDrawable, null)
-
-        binding.settingsChangePassword.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
-            getDrawable(requireContext(), R.drawable.ic_baseline_lock_24),
-            null, rightDrawable, null)
-
-        binding.settingsDeleteUser.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
-            getDrawable(requireContext(), R.drawable.ic_baseline_delete_24),
-            null, rightDrawable, null)
-
-        binding.settingsSignOut.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
-            getDrawable(requireContext(), R.drawable.ic_baseline_logout_24),
             null, rightDrawable, null)
 
         // terms button
@@ -82,24 +78,77 @@ class SettingsFragment : Fragment() {
             navigationBar.isVisible = false
         }
 
-        // change password button
-        binding.settingsChangePassword.settingsBtn.setOnClickListener {
 
-            findNavController().navigate(R.id.action_SettingsFragment_to_changePasswordFragment)
-            navigationBar.isVisible = false
+        binding.user.isVisible = activityViewModel.userStatus
+        binding.guest.isVisible = !activityViewModel.userStatus
+
+        println(activityViewModel.userStatus)
+
+        // check the user status to initialize the necessary buttons
+
+        // check if the user is logged in
+        if (activityViewModel.userStatus) {
+
+            // set the buttons names
+            binding.settingsChangePassword.settingsBtnText.text = "  Change password"
+            binding.settingsDeleteUser.settingsBtnText.text = "  Delete User"
+            binding.settingsSignOut.settingsBtnText.text = "  Sign out"
+
+            // set the buttons drawables
+
+            // Change password
+            binding.settingsChangePassword.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
+                getDrawable(requireContext(), R.drawable.ic_baseline_lock_24),
+                null, rightDrawable, null)
+
+            // Delete user
+            binding.settingsDeleteUser.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
+                getDrawable(requireContext(), R.drawable.ic_baseline_delete_24),
+                null, rightDrawable, null)
+
+            // Sign out
+            binding.settingsSignOut.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
+                getDrawable(requireContext(), R.drawable.ic_baseline_logout_24),
+                null, rightDrawable, null)
+
+            // set the buttons actions
+
+            // change password button
+            binding.settingsChangePassword.settingsBtn.setOnClickListener {
+
+                findNavController().navigate(R.id.action_SettingsFragment_to_changePasswordFragment)
+                navigationBar.isVisible = false
+            }
+
+            // delete user button
+            binding.settingsDeleteUser.settingsBtn.setOnClickListener {
+
+            }
+
+            // sign out button
+            binding.settingsSignOut.settingsBtn.setOnClickListener {
+                viewModel.signOut()
+                activityViewModel.setUserStatus(false)
+                findNavController().navigate(R.id.action_SettingsFragment_to_loginFragment)
+                Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
+            }
+
+        } else {
+            // if the user is in guest mode
+
+            binding.settingsLogIn.settingsBtnText.text = "  Log in"
+
+            // Log in
+            binding.settingsLogIn.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
+                getDrawable(requireContext(), R.drawable.ic_baseline_login_24),
+                null, rightDrawable, null)
+
+            // Log in button
+            binding.settingsLogIn.settingsBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_SettingsFragment_to_loginFragment)
+            }
         }
 
-        // delete user button
-        binding.settingsDeleteUser.settingsBtn.setOnClickListener {
-
-        }
-
-        // sign out button
-        binding.settingsSignOut.settingsBtn.setOnClickListener {
-            viewModel.signOut()
-            findNavController().navigate(R.id.action_SettingsFragment_to_loginFragment)
-            Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
-        }
 
         return binding.root
     }
