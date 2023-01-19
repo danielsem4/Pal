@@ -18,7 +18,8 @@ class SignupViewModel(private val repository: AuthRepository) : ViewModel() {
     fun createUser(userName: String, userEmail: String, userPhone: String, userPass: String){
 
         // check that the fields are not empty
-        val error = if(userEmail.isNotEmpty() || userPass.isNotEmpty() || userName.isNotEmpty() || userPhone.isEmpty())
+        val error = if(userEmail.isNotEmpty() || userPass.isNotEmpty() ||
+                       userName.isNotEmpty() || userPhone.isEmpty())
             "empty String"
 
         // check if the user email is valid

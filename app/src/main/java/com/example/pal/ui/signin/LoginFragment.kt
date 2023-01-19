@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentLoginBinding
 import com.example.pal.ui.MainActivity
+import com.example.pal.ui.MainActivityViewModel
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
 
@@ -22,6 +24,9 @@ class LoginFragment : Fragment() {
     private val viewModel:LoginViewModel by viewModels{
         LoginViewModel.LoginViewModelFactory(AuthRepositoryFirebase())
     }
+
+    // the activity viewModel
+    private val activityViewModel : MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +75,8 @@ class LoginFragment : Fragment() {
                 // when the user status is success we will move to the next page and reset the ui
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
+                    // set the user status true (marked as logged in)
+                    activityViewModel.setUserStatus(true)
                     findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
                     binding.loginUi.isVisible = true
                     binding.loginLoading.isVisible = false

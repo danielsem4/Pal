@@ -14,7 +14,17 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.pal.ui.homeScreens.favorites.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_loginFragment2"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/move_up"
+            app:exitAnim="@anim/move_down"
+            app:popEnterAnim="@anim/move_up"
+            app:popExitAnim="@anim/move_down"
+            app:popUpTo="@id/home_nav"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/SettingsFragment"
         android:name="com.example.pal.ui.homeScreens.settings.SettingsFragment"
@@ -22,16 +32,34 @@
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_SettingsFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/move_up"
+            app:exitAnim="@anim/move_down"
+            app:popEnterAnim="@anim/move_up"
+            app:popExitAnim="@anim/move_down"
+            app:popUpTo="@id/home_nav"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_SettingsFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment" />
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_SettingsFragment_to_contactUsFragment"
-            app:destination="@id/contactUsFragment" />
+            app:destination="@id/contactUsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_SettingsFragment_to_termsFragment"
-            app:destination="@id/termsFragment" />
+            app:destination="@id/termsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -42,7 +70,17 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.example.pal.ui.homeScreens.settings.change_password.ChangePasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/move_up"
+            app:exitAnim="@anim/move_down"
+            app:popEnterAnim="@anim/move_up"
+            app:popExitAnim="@anim/move_down"
+            app:popUpTo="@id/home_nav"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
         android:name="com.example.pal.ui.homeScreens.settings.contact_us.ContactUsFragment"
@@ -60,13 +98,25 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_loginFragment_to_entryFragment"
-            app:destination="@id/entryFragment" />
+            app:destination="@id/entryFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/zoom_in"
+            app:popExitAnim="@anim/zoom_out" />
         <action
             android:id="@+id/action_loginFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment" />
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/entryFragment"
@@ -75,7 +125,11 @@
         tools:layout="@layout/fragment_entry" >
         <action
             android:id="@+id/action_entryFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -84,7 +138,11 @@
         tools:layout="@layout/fragment_signup" >
         <action
             android:id="@+id/action_signupFragment_to_entryFragment"
-            app:destination="@id/entryFragment" />
+            app:destination="@id/entryFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/zoom_in"
+            app:popExitAnim="@anim/zoom_out" />
     </fragment>
 
 </navigation>

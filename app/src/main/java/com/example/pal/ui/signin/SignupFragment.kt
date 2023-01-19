@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentSignupBinding
 import com.example.pal.ui.MainActivity
+import com.example.pal.ui.MainActivityViewModel
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
 
@@ -21,10 +23,12 @@ class SignupFragment : Fragment() {
     private var binding : FragmentSignupBinding by autoCleared()
 
     private val viewModel : SignupViewModel by viewModels(){
-
         // the viewModel Factory
         SignupViewModel.RegisterViewModelFactory(AuthRepositoryFirebase())
     }
+
+    // the activity viewModel
+    private val activityViewModel : MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +69,9 @@ class SignupFragment : Fragment() {
                 // when the user status is success we will move to the next page and reset the ui
                 is Resource.Success ->{
                     Toast.makeText(requireContext(),"Registration successful",Toast.LENGTH_SHORT).show()
+
+                    // set the user status true (marked as logged in)
+                    activityViewModel.setUserStatus(true)
                     findNavController().navigate(R.id.action_signupFragment_to_entryFragment)
                     binding.signUpUi.isVisible = true
                     binding.signUpLoading.isVisible = false
