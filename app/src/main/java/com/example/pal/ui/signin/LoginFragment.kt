@@ -15,15 +15,15 @@ import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentLoginBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-    private var binding : FragmentLoginBinding by autoCleared()
-    private val viewModel:LoginViewModel by viewModels{
-        LoginViewModel.LoginViewModelFactory(AuthRepositoryFirebase())
-    }
+    private var binding: FragmentLoginBinding by autoCleared()
+    private val viewModel: LoginViewModel by viewModels()
 
     // the activity viewModel
     private val activityViewModel : MainActivityViewModel by activityViewModels()
@@ -44,7 +44,6 @@ class LoginFragment : Fragment() {
         binding.guestBtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
         }
-
 
         // users without account will press here and move to the sign up page
         binding.signupBtn.setOnClickListener {

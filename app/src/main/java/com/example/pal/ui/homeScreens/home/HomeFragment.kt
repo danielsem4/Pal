@@ -18,16 +18,16 @@ import com.example.pal.data.repository.Firebase.PetsRepositoryFirebase
 import com.example.pal.databinding.FragmentHomeBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var binding : FragmentHomeBinding by autoCleared()
 
-    private val viewModel : HomeViewModel by viewModels {
-        HomeViewModel.HomeViewModelFactory(PetsRepositoryFirebase())
-    }
+    private val viewModel : HomeViewModel by viewModels()
 
     private val activityViewModel : MainActivityViewModel by activityViewModels()
 

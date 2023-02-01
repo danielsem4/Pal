@@ -15,17 +15,16 @@ import com.example.pal.data.repository.Firebase.AuthRepositoryFirebase
 import com.example.pal.databinding.FragmentSignupBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 import il.co.syntax.myapplication.util.Resource
 
+@AndroidEntryPoint
 class SignupFragment : Fragment() {
 
     private var binding : FragmentSignupBinding by autoCleared()
 
-    private val viewModel : SignupViewModel by viewModels(){
-        // the viewModel Factory
-        SignupViewModel.RegisterViewModelFactory(AuthRepositoryFirebase())
-    }
+    private val viewModel : SignupViewModel by viewModels()
 
     // the activity viewModel
     private val activityViewModel : MainActivityViewModel by activityViewModels()

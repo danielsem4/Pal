@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.pal.databinding.FragmentTermsBinding
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
+@AndroidEntryPoint
 class TermsFragment : Fragment() {
     private var binding : FragmentTermsBinding by autoCleared()
 

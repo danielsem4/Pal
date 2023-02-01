@@ -1,16 +1,34 @@
 package com.example.pal.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.pal.data.models.User
+import com.example.pal.data.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import il.co.syntax.myapplication.util.Resource
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainActivityViewModel : ViewModel() {
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
 
+    // the user status
+    var userStatus: Boolean = false
+
+    // the pet type Dog/Cat
     var petType : String = ""
-
-    var userStatus : Boolean = false
 
     // set the animal type
     fun setAnimalType(type: String) {
         petType = type
+    }
+
+    // check with the repository about the user status
+    init {
+        viewModelScope.launch {
+            userStatus = repository.checkUserStatus()
+        }
     }
 
     // set the user status if he is logged in or guest

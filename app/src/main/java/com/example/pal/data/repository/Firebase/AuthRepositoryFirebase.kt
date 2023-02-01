@@ -9,10 +9,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import safeCall
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AuthRepositoryFirebase : AuthRepository {
 
-    private val firebaseAuth = FirebaseAuth.getInstance() // the auth instance
+class AuthRepositoryFirebase @Inject constructor(private val firebaseAuth: FirebaseAuth)
+    : AuthRepository {
+
+//    private val firebaseAuth = FirebaseAuth.getInstance() // the auth instance
 
     // users collection reference (in the Firestore)
     private val userRef = FirebaseFirestore.getInstance().collection("user")
@@ -77,6 +81,13 @@ class AuthRepositoryFirebase : AuthRepository {
             }
 
         }
+    }
+
+    override suspend fun checkUserStatus(): Boolean {
+
+        val user = userRef.document(firebaseAuth.currentUser!!.uid).get().await()
+            .toObject(User::class.java)
+        return user != null
     }
 
 
