@@ -4,11 +4,13 @@ import androidx.lifecycle.*
 import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import com.example.pal.ui.signin.LoginViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import il.co.syntax.myapplication.util.Resource
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class HomeViewModel(private val petsRep: PetsRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val petsRep: PetsRepository) : ViewModel() {
 
     // the pets ref
     private val _pets : MutableLiveData<Resource<List<Pet>>> = MutableLiveData()
@@ -22,14 +24,6 @@ class HomeViewModel(private val petsRep: PetsRepository) : ViewModel() {
         viewModelScope.launch {
             _pets.value = Resource.Loading()
             _pets.value = petsRep.getPets(animal)
-        }
-    }
-
-
-    @Suppress("UNCHECKED_CAST")
-    class HomeViewModelFactory(private val petsRep: PetsRepository) : ViewModelProvider.NewInstanceFactory(){
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return HomeViewModel(petsRep) as T
         }
     }
 

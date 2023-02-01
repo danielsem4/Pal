@@ -18,15 +18,15 @@ import com.example.pal.databinding.FragmentSettingsBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
 import com.example.pal.ui.signin.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
     private var binding : FragmentSettingsBinding by autoCleared()
 
-    private val viewModel : LoginViewModel by viewModels {
-        LoginViewModel.LoginViewModelFactory(AuthRepositoryFirebase())
-    }
+    private val viewModel : LoginViewModel by viewModels()
 
     // the activity viewModel
     private val activityViewModel : MainActivityViewModel by activityViewModels()

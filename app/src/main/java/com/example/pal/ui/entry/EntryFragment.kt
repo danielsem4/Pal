@@ -16,9 +16,10 @@ import com.example.pal.databinding.FragmentEntryBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
 import com.example.pal.ui.homeScreens.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
-
+@AndroidEntryPoint
 class EntryFragment : Fragment() {
 
     private var binding : FragmentEntryBinding by autoCleared()

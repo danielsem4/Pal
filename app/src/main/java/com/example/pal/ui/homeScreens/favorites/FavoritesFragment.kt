@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.databinding.FragmentFavoritesBinding
 import com.example.pal.ui.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
+@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
     private var binding : FragmentFavoritesBinding by autoCleared()

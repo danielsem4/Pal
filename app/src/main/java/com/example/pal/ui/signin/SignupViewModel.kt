@@ -4,10 +4,13 @@ import android.util.Patterns
 import androidx.lifecycle.*
 import com.example.pal.data.models.User
 import com.example.pal.data.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import il.co.syntax.myapplication.util.Resource
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignupViewModel(private val repository: AuthRepository) : ViewModel() {
+@HiltViewModel
+class SignupViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
 
     // the user status
     private val _userRegistrationStatus = MutableLiveData<Resource<User>>()
@@ -41,16 +44,6 @@ class SignupViewModel(private val repository: AuthRepository) : ViewModel() {
         viewModelScope.launch {
             val registrationResult = repository.createUser(userName, userEmail, userPhone, userPass)
             _userRegistrationStatus.postValue(registrationResult)
-        }
-    }
-
-
-    // factory method
-    @Suppress("UNCHECKED_CAST")
-    class RegisterViewModelFactory(private val repo: AuthRepository) : ViewModelProvider.NewInstanceFactory(){
-
-        override fun <T : ViewModel> create(modelClass: Class<T>) : T {
-            return SignupViewModel(repo) as T
         }
     }
 

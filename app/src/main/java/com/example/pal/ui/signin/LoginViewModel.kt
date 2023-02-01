@@ -3,10 +3,13 @@ package com.example.pal.ui.signin
 import androidx.lifecycle.*
 import com.example.pal.data.models.User
 import com.example.pal.data.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import il.co.syntax.myapplication.util.Resource
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(private val repository: AuthRepository): ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val repository: AuthRepository): ViewModel() {
 
     // the user status
     private val _userSignInStatus = MutableLiveData<Resource<User>>()
@@ -44,14 +47,5 @@ class LoginViewModel(private val repository: AuthRepository): ViewModel() {
     fun signOut() {
         repository.logout()
     }
-
-    // factory method
-    @Suppress("UNCHECKED_CAST")
-    class LoginViewModelFactory(private val repo:AuthRepository) : ViewModelProvider.NewInstanceFactory(){
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return LoginViewModel(repo) as T
-        }
-    }
-
 
 }

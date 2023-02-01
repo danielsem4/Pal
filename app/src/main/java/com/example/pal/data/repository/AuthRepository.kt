@@ -8,9 +8,14 @@ interface AuthRepository {
 
     // general requests for auth
     suspend fun currentUser() : Resource<User>
+
     suspend fun login(email: String, password: String) : Resource<User>
+
     suspend fun createUser(userName: String, userEmail: String, userPhone : String
-    ,userLoginPass: String):Resource<User>
+    ,userLoginPass: String): Resource<User>
+
+    suspend fun checkUserStatus(): Boolean
+
     fun logout()
 
 }
