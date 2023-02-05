@@ -49,6 +49,8 @@ class LoginFragment : Fragment() {
         binding.signupBtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
+
+        // login button
         binding.loginBtn.setOnClickListener{
 
             viewModel.signInUser(binding.emailLogin.text.toString(),binding.passwordLogin.text.toString())
@@ -84,6 +86,8 @@ class LoginFragment : Fragment() {
                 // if the user status is failed we will pop up the message and wont change the ui
                 is Resource.Error ->{
                     Toast.makeText(requireContext(),it.message,Toast.LENGTH_SHORT).show()
+                    binding.loginUi.isVisible = true
+                    binding.loginLoading.isVisible = false
                 }
             }
         }

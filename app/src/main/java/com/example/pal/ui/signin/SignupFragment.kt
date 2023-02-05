@@ -77,7 +77,8 @@ class SignupFragment : Fragment() {
                 // if the user status is failed we will pop up the message and wont change the ui
                 is Resource.Error ->{
                     Toast.makeText(requireContext(),it.message,Toast.LENGTH_SHORT).show()
-
+                    binding.signUpUi.isVisible = true
+                    binding.signUpLoading.isVisible = false
                 }
             }
         }

@@ -1,24 +1,34 @@
 package com.example.pal.data.repository.Firebase
 
 import androidx.lifecycle.MutableLiveData
+import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObjects
 import il.co.syntax.myapplication.util.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import safeCall
+import java.util.*
+import javax.inject.Inject
 
 
-class PetsRepositoryFirebase : PetsRepository {
+class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
+
+    // the system language
+    private val language = Locale.getDefault().language.toString()
 
     // the pets collection
-    private val petsRef = FirebaseFirestore.getInstance().collection("pets")
+    private var petsRef = FirebaseFirestore.getInstance().collection("pets")
+
+    private val dogsRef = FirebaseFirestore.getInstance().collection("dogs")
 
 
     // get pets filtered by animal type
     override suspend fun getPets(animal: String) : Resource<List<Pet>> {
+
+        if (language == "iw")
+            petsRef = FirebaseFirestore.getInstance().collection("petsHW")
 
         // the calls wrapped with safe call to catch exceptions
         return safeCall {
@@ -44,6 +54,17 @@ class PetsRepositoryFirebase : PetsRepository {
 
     override suspend fun getPet(id: String): Resource<Pet> {
         TODO("Not yet implemented")
+    }
+
+    // get the dog info by breed
+    override suspend fun getDogInfo(breed: String): Resource<Dog> {
+
+        return safeCall {
+            val query = dogsRef.whereEqualTo("Breed", breed)
+            val dog = query.get().await().toObjects(Dog::class.java)
+
+            Resource.Success(dog[0])
+        }
     }
 
     override fun getPetsLiveData(data: MutableLiveData<Resource<List<Pet>>>) {

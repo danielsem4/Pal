@@ -1,5 +1,6 @@
 package com.example.pal.ui.homeScreens.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
@@ -33,6 +34,7 @@ class HomeFragment : Fragment() {
 
     private var imageList = ArrayList<SlideModel>()
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,16 +43,19 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        // the gallery description
+        val galleryDescription: String = this.resources.getString(R.string.our_angels)
+
         // get the pets type by the user press in the entry fragment
         viewModel.getPets(activityViewModel.petType)
 
         // set the 6 slider images and there titles
-        imageList.add(SlideModel(R.drawable.home_slider1, "Our Angels"))
-        imageList.add(SlideModel(R.drawable.home_slider2, "Our Angels"))
-        imageList.add(SlideModel(R.drawable.home_slider3, "Our Angels"))
-        imageList.add(SlideModel(R.drawable.home_slider4, "Our Angels"))
-        imageList.add(SlideModel(R.drawable.home_slider5, "Our Angels"))
-        imageList.add(SlideModel(R.drawable.home_slider6, "Our Angels"))
+        imageList.add(SlideModel(R.drawable.home_slider1, galleryDescription))
+        imageList.add(SlideModel(R.drawable.home_slider2, galleryDescription))
+        imageList.add(SlideModel(R.drawable.home_slider3, galleryDescription))
+        imageList.add(SlideModel(R.drawable.home_slider4, galleryDescription))
+        imageList.add(SlideModel(R.drawable.home_slider5, galleryDescription))
+        imageList.add(SlideModel(R.drawable.home_slider6, galleryDescription))
 
         // fill the home slider with the images
         binding.imageHomeSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)

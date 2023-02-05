@@ -43,9 +43,10 @@
     <string name="breed">Breed:</string>
     <string name="life_span">Life-span:</string>
     <string name="search_breed">search breed</string>
+    <string name="our_angels">our angels</string>
+
 
     <string-array name="parameters">
-
         <item>Shedding</item>
         <item>pets friendly</item>
         <item>Kids friendly</item>
@@ -58,8 +59,15 @@
         <item>Intelligence</item>
         <item>Playfulness</item>
         <item>Grooming</item>
+    </string-array>
 
-
+    <string-array name="settings">
+        <item>Contact Us</item>
+        <item>Terms</item>
+        <item>Change password</item>
+        <item>Delete User</item>
+        <item>Sign out</item>
+        <item>Log in</item>
     </string-array>
 
 </resources>
