@@ -32,9 +32,10 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
     }
 
     fun signInUser(userEmail: String, userPass: String){
-        if(userEmail.isEmpty() || userPass.isEmpty())
+        if(userEmail.isEmpty() || userPass.isEmpty()) {
             _userSignInStatus.postValue(Resource.Error("Empty email or password\n please try again"))
 
+        }
         else{
             _userSignInStatus.postValue(Resource.Loading()) // started to load the user
             viewModelScope.launch {

@@ -20,7 +20,6 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
         this.pets.clear()
         this.pets.addAll(pets)
         notifyDataSetChanged()
-
     }
 
     // listen to the actions on click
@@ -54,7 +53,6 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
             // move the action out to outside of this class
             callBack.onPetClicked(adapterPosition)
         }
-
     }
 
     // the 3 functions of the HomeAdapter

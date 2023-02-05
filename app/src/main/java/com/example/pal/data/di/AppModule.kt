@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.*
 import javax.inject.Singleton
 
 @Module
@@ -27,5 +28,7 @@ class AppModule {
 
     // pet repo provider
     @Provides
-    fun providePetsRepositoryFirebase(): PetsRepository = PetsRepositoryFirebase()
+    fun providePetsRepositoryFirebase(): PetsRepository =
+        PetsRepositoryFirebase()
+
 }

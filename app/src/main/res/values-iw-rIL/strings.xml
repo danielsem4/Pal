@@ -41,9 +41,9 @@
     <string name="life_span">תוחלת-חיים:</string>
     <string name="breed">גזע:</string>
     <string name="search_breed">חפש גזע</string>
+    <string name="our_angels">המלאכים שלנו</string>
 
     <string-array name="parameters">
-
         <item>נשירה</item>
         <item>חברתי עם חיות</item>
         <item>חברותי עם ילדים</item>
@@ -56,8 +56,15 @@
         <item>חכם</item>
         <item>שובבנות</item>
         <item>טיפול</item>
+    </string-array>
 
-
+    <string-array name="settings">
+        <item>צרו קשר</item>
+        <item>אודות</item>
+        <item>החלף סיסמא</item>
+        <item>מחק משתמש</item>
+        <item>צא</item>
+        <item>הכנס</item>
     </string-array>
 
 </resources>

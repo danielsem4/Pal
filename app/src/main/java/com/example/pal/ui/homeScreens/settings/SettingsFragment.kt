@@ -40,6 +40,9 @@ class SettingsFragment : Fragment() {
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        // the settings buttons names
+        val settingsButtonsNames = this.resources.getStringArray(R.array.settings)
+
         // the right arrow on the buttons
         val rightDrawable = getDrawable(requireContext(), R.drawable.ic_baseline_arrow_forward_ios_24)
 
@@ -50,8 +53,8 @@ class SettingsFragment : Fragment() {
 
         // set the buttons that will appear always in this page
 
-        binding.settingsTerms.settingsBtnText.text = "  Terms"
-        binding.settingsContactUs.settingsBtnText.text = "  Contact Us"
+        binding.settingsTerms.settingsBtnText.text = settingsButtonsNames[1]
+        binding.settingsContactUs.settingsBtnText.text = settingsButtonsNames[0]
 
 
         // Contact Us
@@ -90,9 +93,9 @@ class SettingsFragment : Fragment() {
         if (activityViewModel.userStatus) {
 
             // set the buttons names
-            binding.settingsChangePassword.settingsBtnText.text = "  Change password"
-            binding.settingsDeleteUser.settingsBtnText.text = "  Delete User"
-            binding.settingsSignOut.settingsBtnText.text = "  Sign out"
+            binding.settingsChangePassword.settingsBtnText.text = settingsButtonsNames[2]
+            binding.settingsDeleteUser.settingsBtnText.text = settingsButtonsNames[3]
+            binding.settingsSignOut.settingsBtnText.text = settingsButtonsNames[4]
 
             // set the buttons drawables
 
@@ -136,7 +139,7 @@ class SettingsFragment : Fragment() {
         } else {
             // if the user is in guest mode
 
-            binding.settingsLogIn.settingsBtnText.text = "  Log in"
+            binding.settingsLogIn.settingsBtnText.text = settingsButtonsNames[5]
 
             // Log in
             binding.settingsLogIn.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(

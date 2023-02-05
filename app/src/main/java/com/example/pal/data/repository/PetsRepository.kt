@@ -1,6 +1,8 @@
 package com.example.pal.data.repository
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
 import il.co.syntax.myapplication.util.Resource
 
@@ -14,6 +16,9 @@ interface PetsRepository {
 
     // get dog info by id (on press of dog from the home screen)
     suspend fun getPet(id: String) : Resource<Pet>
+
+    // get the dog info by breed
+    suspend fun getDogInfo(breed: String) : Resource<Dog>
 
     fun getPetsLiveData(data: MutableLiveData<Resource<List<Pet>>>)
 
