@@ -85,8 +85,11 @@ class AuthRepositoryFirebase @Inject constructor(private val firebaseAuth: Fireb
 
     override suspend fun checkUserStatus(): Boolean {
 
-        val user = userRef.document(firebaseAuth.currentUser!!.uid).get().await()
-            .toObject(User::class.java)
+        // check if the user i connected and return the result
+        val user = firebaseAuth.currentUser?.uid?.let {
+            userRef.document(it).get().await()
+                .toObject(User::class.java)
+        }
         return user != null
     }
 

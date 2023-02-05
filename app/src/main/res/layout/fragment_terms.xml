@@ -3,13 +3,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background2"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.homeScreens.settings.terms.TermsFragment"
     >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="terms"/>
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:id="@+id/header"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/coffee"
+            android:gravity="center">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/backIcon"
+                android:contentDescription="@string/backicon"
+                android:src="@drawable/backicon"
+                android:background="@color/coffee"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/terms"
+                android:textColor="@color/white"
+                android:layout_marginEnd="31dp"
+                android:textSize="28sp"
+                android:textStyle="normal"
+                android:textColorHint="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

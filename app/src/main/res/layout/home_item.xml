@@ -17,14 +17,15 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:padding="8dp"
             android:layout_marginStart="5dp"
+            android:padding="10dp"
             android:src="@drawable/test"
             android:id="@+id/item_pic"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:orientation="vertical">
 
             <TextView

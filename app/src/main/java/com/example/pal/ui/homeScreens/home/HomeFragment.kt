@@ -44,12 +44,13 @@ class HomeFragment : Fragment() {
         // get the pets type by the user press in the entry fragment
         viewModel.getPets(activityViewModel.petType)
 
-        // set the 5 slider images and there titles
+        // set the 6 slider images and there titles
         imageList.add(SlideModel(R.drawable.home_slider1, "Our Angels"))
         imageList.add(SlideModel(R.drawable.home_slider2, "Our Angels"))
         imageList.add(SlideModel(R.drawable.home_slider3, "Our Angels"))
         imageList.add(SlideModel(R.drawable.home_slider4, "Our Angels"))
         imageList.add(SlideModel(R.drawable.home_slider5, "Our Angels"))
+        imageList.add(SlideModel(R.drawable.home_slider6, "Our Angels"))
 
         // fill the home slider with the images
         binding.imageHomeSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)

@@ -15,4 +15,49 @@
     <string name="name">שם</string>
     <string name="phone_number">מספר פלאפון</string>
     <string name="welcome_to_pal">ברוכים הבאים ל-Pal</string>
+    <string name="home">בית</string>
+    <string name="favorites">מועדפים</string>
+    <string name="search">חיפוש</string>
+    <string name="profile">פרופיל</string>
+    <string name="guest">אורח</string>
+    <string name="guest_describe">עליך להכנס כמשתמש רשום על מנת ליצור לעצמך מועדפים</string>
+    <string name="home_title">הכלבים שלנו לאימוץ</string>
+    <string name="home_description">חיות המחמד מחכות רק לכם!</string>
+    <string name="settings">הגדרות</string>
+    <string name="sing_out">צא</string>
+    <string name="loading">בטעינה</string>
+    <string name="welcome_dear">ברוך הבא</string>
+    <string name="general">כללי</string>
+    <string name="test">מבחן</string>
+    <string name="years_old">שנים</string>
+    <string name="slogen">תאמצו, אל תקנו!</string>
+    <string name="your_favorite_friend">החיות המועדפות שלכם</string>
+    <string name="sign_up">הרשם</string>
+    <string name="welcome">ברוך הבא</string>
+    <string name="change_password">שנה סיסמא</string>
+    <string name="contact_us">צרו קשר</string>
+    <string name="terms">אודות</string>
+    <string name="weight">משקל:</string>
+    <string name="life_span">תוחלת-חיים:</string>
+    <string name="breed">גזע:</string>
+    <string name="search_breed">חפש גזע</string>
+
+    <string-array name="parameters">
+
+        <item>נשירה</item>
+        <item>חברתי עם חיות</item>
+        <item>חברותי עם ילדים</item>
+        <item>גודל</item>
+        <item>מרייר</item>
+        <item>עצמאי</item>
+        <item>נבחן</item>
+        <item>מותאם לדירה</item>
+        <item>קל לאילוף</item>
+        <item>חכם</item>
+        <item>שובבנות</item>
+        <item>טיפול</item>
+
+
+    </string-array>
+
 </resources>
