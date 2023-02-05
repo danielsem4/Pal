@@ -18,6 +18,38 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:id="@+id/header"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/coffee"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/backIcon"
+                    android:contentDescription="@string/backicon"
+                    android:src="@drawable/backicon"
+                    android:background="@color/coffee"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/home"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="31dp"
+                    android:textSize="28sp"
+                    android:textStyle="normal"
+                    android:textColorHint="@color/white"/>
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,8 +59,12 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:textSize="30sp"
+                android:shadowColor="@color/white"
+                android:shadowRadius="10"
+                android:shadowDx="0"
+                android:shadowDy="0"
                 android:gravity="center"
-                android:text="@string/find_your_forever_friend_through_adoption"/>
+                android:text="@string/slogen"/>
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_home_slider"

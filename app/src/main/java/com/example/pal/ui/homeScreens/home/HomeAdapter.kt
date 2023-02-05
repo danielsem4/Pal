@@ -44,7 +44,7 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
             binding.itemBreed.text = pet.breed
             binding.itemName.text = pet.name
 
-            Glide.with(binding.root).load(pet.pic).circleCrop().into(binding.itemPic)
+            Glide.with(binding.root).load(pet.pic).into(binding.itemPic)
 
         }
 

@@ -29,15 +29,22 @@ class SignupViewModel @Inject constructor(private val repository: AuthRepository
         else if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches())
             "Not a valid Email"
 
+        else if(userPass.length < 6)
+            "password should have minimum 6 digits"
+
+        else if(userPhone.length != 10)
+            "Invalid phone number"
+
         else null
+
+        // approach to firebase
+        _userRegistrationStatus.postValue(Resource.Loading())
+
 
         error?.let {
             // postValue was used for the option to make it on back thread
             _userRegistrationStatus.postValue(Resource.Error(it))
         }
-
-        // approach to firebase
-        _userRegistrationStatus.postValue(Resource.Loading())
 
         // the viewModel scope is on the main coroutine,
         // but the coroutine that called inside will move it to back coroutine

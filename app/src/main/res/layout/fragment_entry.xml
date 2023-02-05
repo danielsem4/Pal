@@ -8,6 +8,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.entry.EntryFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:id="@+id/header"
+        android:background="@color/coffee"
+        android:gravity="center">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backIcon"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/backicon"
+            android:src="@drawable/backicon"
+            android:background="@color/coffee"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/welcome"
+            android:textColor="@color/white"
+            android:layout_marginEnd="31dp"
+            android:textSize="28sp"
+            android:textStyle="normal"
+            android:textColorHint="@color/white"/>
+
+    </LinearLayout>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="180dp"
         android:layout_height="180dp"
