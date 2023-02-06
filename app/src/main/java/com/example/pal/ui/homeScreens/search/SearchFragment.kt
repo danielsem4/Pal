@@ -14,12 +14,12 @@ import androidx.fragment.app.viewModels
 import com.example.pal.R
 import com.example.pal.databinding.FragmentSearchBinding
 import com.example.pal.ui.MainActivityViewModel
-import com.example.pal.ui.signin.LoginViewModel
-import com.google.api.ResourceProto.resource
+import com.example.pal.util.Loading
 import dagger.hilt.android.AndroidEntryPoint
 
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
+import com.example.pal.util.Success
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -125,22 +125,23 @@ class SearchFragment : Fragment() {
         // Observe the dogs LiveData
         viewModel.dogs.observe(viewLifecycleOwner) {
 
-            when (it) {
-                is Resource.Success -> {
+            when (it.status) {
+                is Success -> {
                     binding.infoPage.isVisible = true
                     binding.searchLoading.isVisible = false
 
-                    viewModel.dog = it.data!!
+                    viewModel.dog = it.status.data!!
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(),it.message, Toast.LENGTH_SHORT).show()
+                is Error -> {
+                    Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
                     binding.searchLoading.isVisible = false
                     binding.infoPage.isVisible = false
                 }
-                is Resource.Loading -> {
+                is Loading -> {
                     binding.infoPage.isVisible = false
                     binding.searchLoading.isVisible = true
                 }
+                else -> {}
             }
         }
     }

@@ -5,10 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pal.data.models.Dog
-import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,7 +29,7 @@ class SearchViewModel @Inject constructor(private val dogsRep: PetsRepository) :
     // set the pets array with the get pets fun from the Pet repository
     fun getDog(breed: String) {
         viewModelScope.launch {
-            _dogs.value = Resource.Loading()
+            _dogs.value = Resource.loading()
             _dogs.value = dogsRep.getDogInfo(breed)
         }
     }

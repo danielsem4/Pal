@@ -13,9 +13,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.databinding.FragmentSignupBinding
 import com.example.pal.ui.MainActivityViewModel
+import com.example.pal.util.Loading
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
+import com.example.pal.util.Success
 
 @AndroidEntryPoint
 class SignupFragment : Fragment() {
@@ -54,17 +56,18 @@ class SignupFragment : Fragment() {
 
         viewModel.userRegistrationStatus.observe(viewLifecycleOwner){
 
-            when(it){
+            when(it.status){
 
                 // when the user status is loading we will show the loading anim ui
-                is Resource.Loading -> {
+                is Loading -> {
                     binding.signUpUi.isVisible = false
                     binding.signUpLoading.isVisible = true
                     Toast.makeText(requireContext(),"Loading",Toast.LENGTH_SHORT).show()
                 }
 
                 // when the user status is success we will move to the next page and reset the ui
-                is Resource.Success ->{
+                is Success
+                ->{
                     Toast.makeText(requireContext(),"Registration successful",Toast.LENGTH_SHORT).show()
 
                     // set the user status true (marked as logged in)
@@ -75,11 +78,12 @@ class SignupFragment : Fragment() {
                 }
 
                 // if the user status is failed we will pop up the message and wont change the ui
-                is Resource.Error ->{
-                    Toast.makeText(requireContext(),it.message,Toast.LENGTH_SHORT).show()
+                is Error ->{
+                    Toast.makeText(requireContext(),it.status.message,Toast.LENGTH_SHORT).show()
                     binding.signUpUi.isVisible = true
                     binding.signUpLoading.isVisible = false
                 }
+                else -> {}
             }
         }
     }

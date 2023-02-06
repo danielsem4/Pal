@@ -2,7 +2,6 @@ package com.example.pal.ui.homeScreens.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.pal.R
-import com.example.pal.data.repository.Firebase.PetsRepositoryFirebase
 import com.example.pal.databinding.FragmentHomeBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
+import com.example.pal.util.Loading
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
+import com.example.pal.util.Success
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -79,33 +79,61 @@ class HomeFragment : Fragment() {
             }
         })
 
-        viewModel.pets.observe(viewLifecycleOwner) {
 
-            when (it) {
+        viewModel.petBen.observe(viewLifecycleOwner){
+            when (it.status) {
 
                 // when the user status is loading we will show the loading anim ui
-                is Resource.Loading -> {
+                is Loading -> {
                     binding.homeUi.isVisible = false
                     binding.homeLoading.isVisible = true
                 }
 
                 // when the user status is success we will move to the next page and reset the ui
-                is Resource.Success -> {
+                is Success -> {
                     binding.homeUi.isVisible = true
                     binding.homeLoading.isVisible = false
-                    (binding.homeRecycler.adapter as HomeAdapter).setPets(it.data!!)
+                    (binding.homeRecycler.adapter as HomeAdapter).setPets(it.status.data!!)
                 }
 
                 // if the user status is failed we will pop up the message and wont change the ui
-                is Resource.Error ->{
+                is Error ->{
                     binding.homeUi.isVisible = true
                     binding.homeLoading.isVisible = false
-                    Toast.makeText(requireContext(),it.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
                 }
+                else -> {}
+            }
+        }
+/*
+        viewModel.pets.observe(viewLifecycleOwner) {
+
+            when (it.status) {
+
+                // when the user status is loading we will show the loading anim ui
+                is Loading -> {
+                    binding.homeUi.isVisible = false
+                    binding.homeLoading.isVisible = true
+                }
+
+                // when the user status is success we will move to the next page and reset the ui
+                is Success -> {
+                    binding.homeUi.isVisible = true
+                    binding.homeLoading.isVisible = false
+                    (binding.homeRecycler.adapter as HomeAdapter).setPets(it.status.data!!)
+                }
+
+                // if the user status is failed we will pop up the message and wont change the ui
+                is Error ->{
+                    binding.homeUi.isVisible = true
+                    binding.homeLoading.isVisible = false
+                    Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
             }
 
         }
-
+*/
 
     }
 

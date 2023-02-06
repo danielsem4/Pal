@@ -5,8 +5,7 @@ import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObjects
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
 import kotlinx.coroutines.tasks.await
 import safeCall
 import java.util.*
@@ -43,7 +42,7 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
                 val pet = doc.toObject(Pet::class.java)
                 petsList.add(pet)
             }
-            Resource.Success(petsList)
+            Resource.success(petsList)
         }
 
     }
@@ -63,25 +62,25 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
             val query = dogsRef.whereEqualTo("Breed", breed)
             val dog = query.get().await().toObjects(Dog::class.java)
 
-            Resource.Success(dog[0])
+            Resource.success(dog[0])
         }
     }
 
     override fun getPetsLiveData(data: MutableLiveData<Resource<List<Pet>>>) {
 
-        data.postValue(Resource.Loading())
+        data.postValue(Resource.loading())
 
         petsRef.orderBy("animal").addSnapshotListener { snapshot, error ->
 
             if (error != null) {
-                data.postValue(error.localizedMessage?.let { Resource.Error(it) })
+                data.postValue(error.localizedMessage?.let { Resource.error(it) })
             }
             if (snapshot != null && !snapshot.isEmpty) {
-                data.postValue(Resource.Success(snapshot.toObjects(Pet::class.java)))
+                data.postValue(Resource.success(snapshot.toObjects(Pet::class.java)))
             }
 
             else {
-                data.postValue(Resource.Error("No Data"))
+                data.postValue(Resource.error("No Data"))
             }
         }
 
