@@ -97,7 +97,7 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
                 val dog = doc.toObject(Dog::class.java)
                 dogsList.add(dog)
             }
-            Resource.Success(dogsList)
+            Resource.success(dogsList)
 
         }
     }

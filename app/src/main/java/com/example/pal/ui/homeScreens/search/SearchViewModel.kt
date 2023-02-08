@@ -21,7 +21,7 @@ class SearchViewModel @Inject constructor(private val dogsRep: PetsRepository) :
     fun getDogs() {
         viewModelScope.launch {
 
-            _dogs.value = Resource.Loading()
+            _dogs.value = Resource.loading()
             _dogs.value = dogsRep.getDogs()
 
         }
