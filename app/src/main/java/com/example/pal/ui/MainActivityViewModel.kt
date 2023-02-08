@@ -1,12 +1,9 @@
 package com.example.pal.ui
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pal.data.models.User
 import com.example.pal.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import il.co.syntax.myapplication.util.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

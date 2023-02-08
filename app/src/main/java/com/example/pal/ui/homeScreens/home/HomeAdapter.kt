@@ -14,6 +14,7 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
     // the pets array list
     private val pets = ArrayList<Pet>()
 
+    //lateinit var pet: Pet
     // set the pets
     @SuppressLint("NotifyDataSetChanged")
     fun setPets(pets: Collection<Pet>) {
@@ -24,7 +25,7 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
 
     // listen to the actions on click
     interface PetsListener {
-        fun onPetClicked(index: Int)
+        fun onPetClicked(index: Int,petId:Int)
     }
 
     // hold the view and bind it to the information with bind fun
@@ -38,6 +39,7 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
 
         // bind the data to the view
         fun bind(pet: Pet) {
+
             binding.itemSex.text = pet.sex
             binding.itemAge.text = pet.age
             binding.itemBreed.text = pet.breed
@@ -51,7 +53,12 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
         override fun onClick(p0: View?) {
 
             // move the action out to outside of this class
-            callBack.onPetClicked(adapterPosition)
+            //callBack.onPetClicked(adapterPosition)
+            if (p0 != null) {
+                //click on the recycler we take the position and the id of the pet in the same postion
+                callBack.onPetClicked(adapterPosition,pets[adapterPosition].id)
+            }
+
         }
     }
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import com.example.pal.data.models.User
 import com.example.pal.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,12 +38,12 @@ class SignupViewModel @Inject constructor(private val repository: AuthRepository
         else null
 
         // approach to firebase
-        _userRegistrationStatus.postValue(Resource.Loading())
+        _userRegistrationStatus.postValue(Resource.loading())
 
 
         error?.let {
             // postValue was used for the option to make it on back thread
-            _userRegistrationStatus.postValue(Resource.Error(it))
+            _userRegistrationStatus.postValue(Resource.error(it))
         }
 
         // the viewModel scope is on the main coroutine,

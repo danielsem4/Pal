@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.pal.ui.homeScreens.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_singlePet"
+            app:destination="@id/singlePet" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.pal.ui.homeScreens.favorites.FavoritesFragment"
@@ -144,5 +148,10 @@
             app:popEnterAnim="@anim/zoom_in"
             app:popExitAnim="@anim/zoom_out" />
     </fragment>
+    <fragment
+        android:id="@+id/singlePet"
+        android:name="com.example.pal.SinglePet"
+        android:label="fragment_single_pet"
+        tools:layout="@layout/fragment_single_pet" />
 
 </navigation>

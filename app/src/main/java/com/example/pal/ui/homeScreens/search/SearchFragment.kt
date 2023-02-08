@@ -16,13 +16,18 @@ import com.bumptech.glide.Glide
 import com.example.pal.R
 import com.example.pal.databinding.FragmentSearchBinding
 import com.example.pal.ui.MainActivityViewModel
+
+import com.example.pal.util.Loading
+
 import com.example.pal.ui.homeScreens.home.HomeAdapter
 import com.example.pal.ui.signin.LoginViewModel
 import com.google.api.ResourceProto.resource
+
 import dagger.hilt.android.AndroidEntryPoint
 
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
+import com.example.pal.util.Success
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -67,6 +72,7 @@ class SearchFragment : Fragment() {
         // Observe the dogs LiveData
         viewModel.dogs.observe(viewLifecycleOwner) {
 
+
             when (it) {
 
                 is Resource.Loading -> {
@@ -85,6 +91,7 @@ class SearchFragment : Fragment() {
                     binding.searchLoading.isVisible = false
                     binding.searchPage.isVisible = false
                 }
+
 
             }
         }

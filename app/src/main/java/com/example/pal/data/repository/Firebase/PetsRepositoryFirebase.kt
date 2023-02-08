@@ -6,8 +6,8 @@ import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObjects
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
 import safeCall
 import java.util.*
@@ -44,24 +44,51 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
                 val pet = doc.toObject(Pet::class.java)
                 petsList.add(pet)
             }
-            Resource.Success(petsList)
+            Resource.success(petsList)
         }
 
     }
 
+    override suspend fun getPet(id: Int): Resource<Pet> {
+
+        if (language == "iw")
+            petsRef = FirebaseFirestore.getInstance().collection("petsHW")
+
+
+        return safeCall {
+            // Retrieve the document with the given id
+            val document = petsRef.document(id.toString()).get().await()
+
+            // Convert the document to a Pet object
+            val pet = document.toObject(Pet::class.java)
+
+            Resource.success(pet!!)
+        }
+    }
+
+    /*
+        override suspend fun getPet(id: Int): Resource<Pet> {
+            if (language == "iw")
+                petsRef = FirebaseFirestore.getInstance().collection("petsHW")
+            return safeCall {
+                val pet =petsRef.document().id
+
+                Resource.success(petG!!)
+            }
+        }
+    */
     override suspend fun findDogByBreed(breed: String): Resource<Void> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getPet(id: String): Resource<Pet> {
-        TODO("Not yet implemented")
-    }
+
 
     // get the dog info by breed
     override suspend fun getDogs(): Resource<List<Dog>> {
 
         return safeCall {
             val snapshot = dogsRef.get().await()
+
 
             val dogsList = mutableListOf<Dog>()
 
@@ -71,24 +98,25 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
                 dogsList.add(dog)
             }
             Resource.Success(dogsList)
+
         }
     }
 
     override fun getPetsLiveData(data: MutableLiveData<Resource<List<Pet>>>) {
 
-        data.postValue(Resource.Loading())
+        data.postValue(Resource.loading())
 
         petsRef.orderBy("animal").addSnapshotListener { snapshot, error ->
 
             if (error != null) {
-                data.postValue(error.localizedMessage?.let { Resource.Error(it) })
+                data.postValue(error.localizedMessage?.let { Resource.error(it) })
             }
             if (snapshot != null && !snapshot.isEmpty) {
-                data.postValue(Resource.Success(snapshot.toObjects(Pet::class.java)))
+                data.postValue(Resource.success(snapshot.toObjects(Pet::class.java)))
             }
 
             else {
-                data.postValue(Resource.Error("No Data"))
+                data.postValue(Resource.error("No Data"))
             }
         }
 

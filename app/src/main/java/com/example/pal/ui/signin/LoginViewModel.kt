@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.example.pal.data.models.User
 import com.example.pal.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,18 +26,18 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
 
     init {
         viewModelScope.launch {
-            _currentUser.postValue(Resource.Loading()) // started to load the user
+            _currentUser.postValue(Resource.loading()) // started to load the user
             _currentUser.postValue(repository.currentUser())
         }
     }
 
     fun signInUser(userEmail: String, userPass: String){
         if(userEmail.isEmpty() || userPass.isEmpty()) {
-            _userSignInStatus.postValue(Resource.Error("Empty email or password\n please try again"))
+            _userSignInStatus.postValue(Resource.error("Empty email or password\n please try again"))
 
         }
         else{
-            _userSignInStatus.postValue(Resource.Loading()) // started to load the user
+            _userSignInStatus.postValue(Resource.loading()) // started to load the user
             viewModelScope.launch {
                 val loginResult = repository.login(userEmail, userPass)
                 _userSignInStatus.postValue(loginResult)
