@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
 
         binding.homeRecycler.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.homeRecycler.adapter = HomeAdapter(object :  HomeAdapter.PetsListener {
+        binding.homeRecycler.adapter = HomeAdapter(object : HomeAdapter.PetsListener {
             override fun onPetClicked(index: Int) {
                 TODO("Not yet implemented")
             }
@@ -103,10 +103,6 @@ class HomeFragment : Fragment() {
                     Toast.makeText(requireContext(),it.message, Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
-
-
     }
-
 }

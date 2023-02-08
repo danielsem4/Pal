@@ -30,5 +30,4 @@ class AppModule {
     @Provides
     fun providePetsRepositoryFirebase(): PetsRepository =
         PetsRepositoryFirebase()
-
 }

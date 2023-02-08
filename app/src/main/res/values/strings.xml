@@ -44,6 +44,7 @@
     <string name="life_span">Life-span:</string>
     <string name="search_breed">search breed</string>
     <string name="our_angels">our angels</string>
+    <string name="more_info">more info...</string>
 
 
     <string-array name="parameters">
