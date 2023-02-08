@@ -73,26 +73,26 @@ class SearchFragment : Fragment() {
         viewModel.dogs.observe(viewLifecycleOwner) {
 
 
-            when (it) {
+            when (it.status) {
 
-                is Resource.Loading -> {
+                is Loading -> {
                     binding.searchPage.isVisible = false
                     binding.searchLoading.isVisible = true
                 }
 
-                is Resource.Success -> {
+                is Success -> {
                     binding.searchPage.isVisible = true
                     binding.searchLoading.isVisible = false
-                    (binding.searchRecycler.adapter as SearchAdapter).setDogs(it.data!!)
+                    (binding.searchRecycler.adapter as SearchAdapter).setDogs(it.status.data!!)
                 }
 
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(),it.message, Toast.LENGTH_SHORT).show()
+                is Error -> {
+                    Toast.makeText(requireContext(),"No such a breed", Toast.LENGTH_SHORT).show()
                     binding.searchLoading.isVisible = false
                     binding.searchPage.isVisible = false
                 }
 
-
+                else -> {}
             }
         }
     }
