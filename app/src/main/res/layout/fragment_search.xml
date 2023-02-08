@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="visible"
         android:id="@+id/search_page">
 
         <SearchView
@@ -22,215 +23,15 @@
             android:iconifiedByDefault="false"
             android:background="@drawable/search_shape"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
             />
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:id="@+id/info_page">
+            android:id="@+id/search_recycler"
+            android:padding="5dp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/vital_stats"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/weight_wrapper"
-                        android:layout_gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/weight"
-                            android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:textSize="20sp"/>
-
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/weight"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/weight" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="55 to 85 pounds"
-                            android:id="@+id/weight_describe"
-                            android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/life_span"
-                            android:textStyle="bold"
-                            android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"/>
-
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/life_span"
-                            android:contentDescription="@string/weight" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="10 to 14 years"
-                            android:id="@+id/lifeSpan_describe"
-                            android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/breed"
-                        android:layout_gravity="center"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:textSize="20sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Golden Shepherd"
-                        android:id="@+id/breed_describe"
-                        android:layout_gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"/>
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="250dp"
-                        android:layout_height="180dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/test" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:visibility="visible"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <include
-                        android:id="@+id/shedding_ratingBar"
-                        layout="@layout/search_stars" />
-
-                    <include
-                        layout="@layout/search_stars"
-                        android:id="@+id/other_pets_friendly_ratingBar"/>
-
-                    <include
-                        layout="@layout/search_stars"
-                        android:id="@+id/children_friendly_ratingBar"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-
-                        android:id="@+id/dogs_only_stats">
-
-                        <include
-                            android:id="@+id/size_ratingBar"
-                            layout="@layout/search_stars" />
-
-                        <include
-                            layout="@layout/search_stars"
-                            android:id="@+id/drooling_ratingBar"/>
-
-                        <include
-                            layout="@layout/search_stars"
-                            android:id="@+id/tolerates_being_alone_ratingBar"/>
-
-                        <include
-                            layout="@layout/search_stars"
-                            android:id="@+id/barking_ratingBar"/>
-
-                        <include
-                            layout="@layout/search_stars"
-                            android:id="@+id/apartment_living_ratingBar"/>
-
-                        <include
-                            layout="@layout/search_stars"
-                            android:id="@+id/easy_to_train_ratingBar"/>
-
-                        <include
-                            layout="@layout/search_stars"
-                            android:id="@+id/Intelligence_ratingBar"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        android:id="@+id/cats_only_stats">
-
-                        <include
-                            android:id="@+id/playfulness_ratingBar"
-                            layout="@layout/search_stars" />
-
-                        <include
-                            layout="@layout/search_stars"
-                            android:id="@+id/grooming_ratingBar"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
-        </LinearLayout>
 
     </LinearLayout>
 

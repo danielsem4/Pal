@@ -75,12 +75,14 @@ class HomeFragment : Fragment() {
 
         binding.homeRecycler.layoutManager = LinearLayoutManager(requireContext())
 
+
         binding.homeRecycler.adapter = HomeAdapter(object :  HomeAdapter.PetsListener {
             override fun onPetClicked(index: Int,petId:Int) {
 
                 imageList.clear()
                 findNavController().navigate(R.id.action_homeFragment_to_singlePet,
                bundleOf("petId" to petId))//when pressing on a pet we passing the id of the dog to single pet fragment
+
 
             }
 
@@ -112,8 +114,5 @@ class HomeFragment : Fragment() {
                 else -> {}
             }
         }
-
-
     }
-
 }

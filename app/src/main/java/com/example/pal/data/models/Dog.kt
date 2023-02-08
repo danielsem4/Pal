@@ -1,9 +1,12 @@
 package com.example.pal.data.models
 
-data class Dog(val apartment_living: Int, val barking_level: Int, val breed: String,
-               val drooling_level: Int, val easy_to_train: Int, val intelligence: Int,
-               val kid_friendly: Int, val life_span: String, val other_dogs_friendly: Int,
-               val shedding: Int, val strangers_Friendly: Int, val size: Int,
-               val tolerates_being_alone: Int, val weight: Int) {
+data class Dog(val Apartment_Living: Int, val Barking_Level: Int, val Breed: String,
+               val Drooling_Level: Int, val Easy_To_Train: Int, val Intelligence: Int,
+               val Kid_Friendly: Int, val Life_Span: String,
+               val Other_Dogs_Friendly: Int, val Shedding: Int, val Strangers_Friendly: Int,
+               val Size: Int, val Tolerates_Being_Alone: Int, val Weight: String, val image: String) {
+
+    constructor(): this(0, 0, "", 0, 0, 0, 0, "", 0, 0, 0,
+        0, 0, "", "")
 
 }

@@ -63,7 +63,6 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
     }
 
     // the 3 functions of the HomeAdapter
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder = PetViewHolder (
             HomeItemBinding.inflate(LayoutInflater.from(parent.context),
             parent,

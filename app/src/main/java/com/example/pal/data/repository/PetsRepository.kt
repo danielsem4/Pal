@@ -17,7 +17,7 @@ interface PetsRepository {
     suspend fun getPet(id: Int) : Resource<Pet>
 
     // get the dog info by breed
-    suspend fun getDogInfo(breed: String) : Resource<Dog>
+    suspend fun getDogs() : Resource<List<Dog>>
 
     fun getPetsLiveData(data: MutableLiveData<Resource<List<Pet>>>)
 

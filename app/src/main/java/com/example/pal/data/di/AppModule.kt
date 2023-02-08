@@ -32,6 +32,7 @@ class AppModule {
 
     // pet repo provider
     @Provides
+
     fun providePetsRepositoryFirebase(): PetsRepository = PetsRepositoryFirebase()
 
     //@Provides
@@ -47,5 +48,7 @@ class AppModule {
     @Provides
     @Singleton
     fun providePetDao(database: PetDatabase) = database.petDao()
+
+
 
 }

@@ -18,16 +18,14 @@ class HomeViewModel @Inject constructor(private val petsRep: PetsRepository,priv
     // the pets ref we expose
     val pets : LiveData<Resource<List<Pet>>> = _pets
 
+
     lateinit var petBen: LiveData<Resource<List<Pet>>>
+
     // set the pets array with the get pets fun from the Pet repository
     fun getPets(animal: String) {
 
         petBen=petRepositoryR.getPets(animal)
 
     }
-
-
-
-
 
 }
