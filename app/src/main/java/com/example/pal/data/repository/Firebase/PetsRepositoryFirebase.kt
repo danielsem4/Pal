@@ -1,5 +1,6 @@
 package com.example.pal.data.repository.Firebase
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
@@ -57,13 +58,19 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
     }
 
     // get the dog info by breed
-    override suspend fun getDogInfo(breed: String): Resource<Dog> {
+    override suspend fun getDogs(): Resource<List<Dog>> {
 
         return safeCall {
-            val query = dogsRef.whereEqualTo("Breed", breed)
-            val dog = query.get().await().toObjects(Dog::class.java)
+            val snapshot = dogsRef.get().await()
 
-            Resource.Success(dog[0])
+            val dogsList = mutableListOf<Dog>()
+
+            // iterate on the snapshot i got and convert it to Pet object and push it to the petsList
+            for (doc in snapshot) {
+                val dog = doc.toObject(Dog::class.java)
+                dogsList.add(dog)
+            }
+            Resource.Success(dogsList)
         }
     }
 
