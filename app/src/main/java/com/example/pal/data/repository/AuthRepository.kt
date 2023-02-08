@@ -1,8 +1,7 @@
 package com.example.pal.data.repository
 
-import android.provider.ContactsContract.CommonDataKinds.Phone
 import com.example.pal.data.models.User
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
 
 interface AuthRepository {
 

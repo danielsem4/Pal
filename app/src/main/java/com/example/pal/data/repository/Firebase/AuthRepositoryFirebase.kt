@@ -4,7 +4,7 @@ import com.example.pal.data.models.User
 import com.example.pal.data.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import il.co.syntax.myapplication.util.Resource
+import com.example.pal.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -30,7 +30,7 @@ class AuthRepositoryFirebase @Inject constructor(private val firebaseAuth: Fireb
                 // get the current user who is signed in
                 val user = userRef.document(firebaseAuth.currentUser!!.uid).get().await().toObject(User::class.java)
 
-                Resource.Success(user!!)
+                Resource.success(user!!)
             }
         }
     }
@@ -49,7 +49,7 @@ class AuthRepositoryFirebase @Inject constructor(private val firebaseAuth: Fireb
                 // get the user that belongs to this email and password
                 val user = userRef.document(result.user?.uid!!).get().await().toObject(User::class.java)!!
 
-                Resource.Success(user)
+                Resource.success(user)
 
             }
         }
@@ -61,7 +61,7 @@ class AuthRepositoryFirebase @Inject constructor(private val firebaseAuth: Fireb
         userEmail: String,
         userPhone: String,
         userLoginPass: String,
-    )  : Resource<User>{
+    )  : Resource<User> {
 
         // make async coroutine block to sync block inside the Dispatchers.IO scope
         return withContext(Dispatchers.IO){
@@ -74,7 +74,7 @@ class AuthRepositoryFirebase @Inject constructor(private val firebaseAuth: Fireb
                 val newUser = User(userName, userEmail, userPhone) // we create user for the firestore
                 userRef.document(userId).set(newUser).await() // push the new user to the Users table
 
-                Resource.Success(newUser)
+                Resource.success(newUser)
             }
 
         }
