@@ -6,6 +6,7 @@ import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.pal.util.Resource
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
 import safeCall
 import java.util.*
@@ -47,13 +48,39 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
 
     }
 
+    override suspend fun getPet(id: Int): Resource<Pet> {
+
+        if (language == "iw")
+            petsRef = FirebaseFirestore.getInstance().collection("petsHW")
+
+
+        return safeCall {
+            // Retrieve the document with the given id
+            val document = petsRef.document(id.toString()).get().await()
+
+            // Convert the document to a Pet object
+            val pet = document.toObject(Pet::class.java)
+
+            Resource.success(pet!!)
+        }
+    }
+
+    /*
+        override suspend fun getPet(id: Int): Resource<Pet> {
+            if (language == "iw")
+                petsRef = FirebaseFirestore.getInstance().collection("petsHW")
+            return safeCall {
+                val pet =petsRef.document().id
+
+                Resource.success(petG!!)
+            }
+        }
+    */
     override suspend fun findDogByBreed(breed: String): Resource<Void> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getPet(id: String): Resource<Pet> {
-        TODO("Not yet implemented")
-    }
+
 
     // get the dog info by breed
     override suspend fun getDogInfo(breed: String): Resource<Dog> {

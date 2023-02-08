@@ -14,7 +14,7 @@ interface PetsRepository {
     suspend fun getPets(animal: String) : Resource<List<Pet>>
 
     // get dog info by id (on press of dog from the home screen)
-    suspend fun getPet(id: String) : Resource<Pet>
+    suspend fun getPet(id: Int) : Resource<Pet>
 
     // get the dog info by breed
     suspend fun getDogInfo(breed: String) : Resource<Dog>

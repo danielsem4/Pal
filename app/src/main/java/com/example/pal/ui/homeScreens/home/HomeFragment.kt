@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -74,9 +76,14 @@ class HomeFragment : Fragment() {
         binding.homeRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         binding.homeRecycler.adapter = HomeAdapter(object :  HomeAdapter.PetsListener {
-            override fun onPetClicked(index: Int) {
-                TODO("Not yet implemented")
+            override fun onPetClicked(index: Int,petId:Int) {
+
+                imageList.clear()
+                findNavController().navigate(R.id.action_homeFragment_to_singlePet,
+               bundleOf("petId" to petId))//when pressing on a pet we passing the id of the dog to single pet fragment
+
             }
+
         })
 
 
@@ -105,35 +112,7 @@ class HomeFragment : Fragment() {
                 else -> {}
             }
         }
-/*
-        viewModel.pets.observe(viewLifecycleOwner) {
 
-            when (it.status) {
-
-                // when the user status is loading we will show the loading anim ui
-                is Loading -> {
-                    binding.homeUi.isVisible = false
-                    binding.homeLoading.isVisible = true
-                }
-
-                // when the user status is success we will move to the next page and reset the ui
-                is Success -> {
-                    binding.homeUi.isVisible = true
-                    binding.homeLoading.isVisible = false
-                    (binding.homeRecycler.adapter as HomeAdapter).setPets(it.status.data!!)
-                }
-
-                // if the user status is failed we will pop up the message and wont change the ui
-                is Error ->{
-                    binding.homeUi.isVisible = true
-                    binding.homeLoading.isVisible = false
-                    Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
-                }
-                else -> {}
-            }
-
-        }
-*/
 
     }
 

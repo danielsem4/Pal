@@ -9,7 +9,9 @@ import kotlinx.coroutines.Dispatchers
 
 fun <T,A> performFetchingAndSaving(localDbFetch:() -> LiveData<T>,
                                    remoteDbFetch:suspend ()-> Resource <A>,
-                                   localDbSave: suspend (A)-> Unit): LiveData<Resource<T>> =
+                                   localDbSave: suspend (A)-> Unit
+                                  /* ,remoteDbFetchApi:suspend ()-> Resource <A>*/
+): LiveData<Resource<T>> =
 
 
     liveData(Dispatchers.IO){

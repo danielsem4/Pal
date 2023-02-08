@@ -22,15 +22,6 @@ class HomeViewModel @Inject constructor(private val petsRep: PetsRepository,priv
     // set the pets array with the get pets fun from the Pet repository
     fun getPets(animal: String) {
 
-        /*
-        viewModelScope.launch {
-            //val petDog=petRepositoryR.getPets(animal)
-            //val petCat=petRepositoryR.getPets("Cat")
-            _pets.value = Resource.loading()
-            _pets.value = petsRep.getPets(animal)
-        }
-
-         */
         petBen=petRepositoryR.getPets(animal)
 
     }

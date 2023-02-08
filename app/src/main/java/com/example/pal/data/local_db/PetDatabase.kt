@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.pal.data.models.Pet
 
-@Database(entities = arrayOf(Pet::class), version = 1, exportSchema = false)
+@Database(entities = [Pet::class], version = 1, exportSchema = false)
 abstract class PetDatabase :RoomDatabase(){
 
     abstract fun petDao():PetDao
@@ -20,7 +20,7 @@ abstract class PetDatabase :RoomDatabase(){
            return instance?: synchronized(this){
                 Room.databaseBuilder(context.applicationContext,
                     PetDatabase::class.java,
-                    "pets_table")
+                    "pets_tablee")
                     .fallbackToDestructiveMigration().build().also {
                         instance=it
                     }
