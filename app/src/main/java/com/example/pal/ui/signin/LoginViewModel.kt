@@ -23,7 +23,6 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
     // expose access to the user
     val currentUser: LiveData<Resource<User>> = _currentUser
 
-
     init {
         viewModelScope.launch {
             _currentUser.postValue(Resource.loading()) // started to load the user

@@ -66,5 +66,10 @@
         <item>צא</item>
         <item>הכנס</item>
     </string-array>
+    <string name="description">תיאור</string>
+    <string name="sex">מין</string>
+    <string name="age">גיל</string>
+    <string name="hello_blank_fragment">.</string>
+    <string name="more_info">מידע נוסף..</string>
 
 </resources>

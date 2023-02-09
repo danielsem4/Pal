@@ -5,28 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.pal.R
+import com.example.pal.data.models.Cat
+import com.example.pal.data.models.Dog
 import com.example.pal.databinding.FragmentSearchBinding
 import com.example.pal.ui.MainActivityViewModel
 
 import com.example.pal.util.Loading
 
-import com.example.pal.ui.homeScreens.home.HomeAdapter
-import com.example.pal.ui.signin.LoginViewModel
-import com.google.api.ResourceProto.resource
-
 import dagger.hilt.android.AndroidEntryPoint
 
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
-import com.example.pal.util.Resource
 import com.example.pal.util.Success
 
 @AndroidEntryPoint
@@ -58,20 +55,36 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bundle = Bundle()
+
         // set the recycler
         binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.searchRecycler.adapter = SearchAdapter(object : SearchAdapter.PetsListener {
+        if (activityViewModel.petType == "Dog") {
+            binding.searchRecycler.adapter = SearchAdapter(object : SearchAdapter.DogsListener {
 
-            override fun onPetClicked(index: Int) {
-                TODO("Not yet implemented")
-            }
-        }, activityViewModel.petType)
+                override fun onPetClicked(index: Int, dog: Dog) {
+
+                    bundle.putSerializable("dog", dog)
+
+                    findNavController().navigate(R.id.action_searchFragment_to_singlePetInfo, bundle)
+                }
+            },null ,activityViewModel.petType)
+        } else {
+            binding.searchRecycler.adapter = SearchAdapter(null, object : SearchAdapter.CatsListener {
+
+                override fun onPetClicked(index: Int, cat: Cat) {
+
+                    bundle.putSerializable("cat", cat)
+
+                    findNavController().navigate(R.id.action_searchFragment_to_singlePetInfo, bundle)
+                }
+            }, activityViewModel.petType)
+        }
 
 
         // Observe the dogs LiveData
         viewModel.dogs.observe(viewLifecycleOwner) {
-
 
             when (it.status) {
 

@@ -16,13 +16,13 @@ class PetRepositoryR @Inject constructor(
     private val localDataSource:PetDao
 ) {
 
-    fun getPets(animal:String)= performFetchingAndSaving(
+    fun getPets(animal: String) = performFetchingAndSaving(
         {localDataSource.getAllPets(animal)},
         {remoteDataSource.getPets(animal) },
         {localDataSource.insertPets(it)}
     )
 
-    fun getPet(id:Int)= performFetchingAndSaving(
+    fun getPet(id: Int) = performFetchingAndSaving(
         {localDataSource.getPet(id)},
         {remoteDataSource.getPet(id) },
         {localDataSource.insertPet(it)}

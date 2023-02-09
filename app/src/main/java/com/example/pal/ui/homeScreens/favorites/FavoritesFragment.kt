@@ -7,20 +7,24 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.pal.R
 import com.example.pal.databinding.FragmentFavoritesBinding
 import com.example.pal.ui.MainActivityViewModel
+import com.example.pal.ui.signin.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
-    private var binding : FragmentFavoritesBinding by autoCleared()
+    private var binding: FragmentFavoritesBinding by autoCleared()
+
+    private val loginViewModel: LoginViewModel by viewModels()
 
     // the activity viewModel
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +40,7 @@ class FavoritesFragment : Fragment() {
             findNavController().navigate(R.id.action_favoritesFragment_to_loginFragment2)
         }
 
-        println(activityViewModel.userStatus)
+
 
         binding.guestScreen.isVisible = !activityViewModel.userStatus
         binding.userScreen.isVisible = activityViewModel.userStatus
@@ -45,7 +49,4 @@ class FavoritesFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

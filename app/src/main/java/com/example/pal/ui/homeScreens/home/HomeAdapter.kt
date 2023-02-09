@@ -25,7 +25,7 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
 
     // listen to the actions on click
     interface PetsListener {
-        fun onPetClicked(index: Int,petId:Int)
+        fun onPetClicked(index: Int, petId: Int)
     }
 
     // hold the view and bind it to the information with bind fun
@@ -53,10 +53,11 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
         override fun onClick(p0: View?) {
 
             // move the action out to outside of this class
-            //callBack.onPetClicked(adapterPosition)
+            // callBack.onPetClicked(adapterPosition)
             if (p0 != null) {
-                //click on the recycler we take the position and the id of the pet in the same postion
-                callBack.onPetClicked(adapterPosition,pets[adapterPosition].id)
+                // click on the recycler we take the position
+                // and the id of the pet in the same position
+                callBack.onPetClicked(adapterPosition, pets[adapterPosition].id)
             }
 
         }

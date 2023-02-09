@@ -1,4 +1,4 @@
-package com.example.pal
+package com.example.pal.ui.homeScreens.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -9,11 +9,11 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SinglePetViewModel @Inject constructor(petRepositoryR: PetRepositoryR):ViewModel() {
-
+class SinglePetViewModel @Inject constructor(petRepositoryR: PetRepositoryR) : ViewModel() {
 
     private val _id = MutableLiveData<Int>()
 
+    // function that will store the pets we pressed
     val pet =Transformations.switchMap(_id){
         petRepositoryR.getPet(it)
     }

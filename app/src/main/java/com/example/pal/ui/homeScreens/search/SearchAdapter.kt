@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pal.data.models.Cat
 import com.example.pal.data.models.Dog
-import com.example.pal.data.models.Pet
 import com.example.pal.databinding.SearchItemBinding
 
-class SearchAdapter (private val callBack: PetsListener, private val petType: String)
+class SearchAdapter(private val callBackDog: DogsListener?, private val callBackCat: CatsListener?,
+                    private val petType: String)
     : RecyclerView.Adapter<SearchAdapter.PetViewHolder>(){
 
     private val dogs = ArrayList<Dog>()
@@ -34,8 +34,13 @@ class SearchAdapter (private val callBack: PetsListener, private val petType: St
     }
 
     // listen to the actions on click
-    interface PetsListener {
-        fun onPetClicked(index: Int)
+    interface DogsListener {
+        fun onPetClicked(index: Int, dog: Dog)
+    }
+
+    // listen to the actions on click
+    interface CatsListener {
+        fun onPetClicked(index: Int, cat: Cat)
     }
 
     // hold the view and bind it to the information with bind fun
@@ -71,9 +76,13 @@ class SearchAdapter (private val callBack: PetsListener, private val petType: St
 
         // init the onClick fun
         override fun onClick(p0: View?) {
-
-            // move the action out to outside of this class
-            callBack.onPetClicked(adapterPosition)
+            if (p0 != null && petType == "Dog") {
+                // move the action out to outside of this class
+                callBackDog?.onPetClicked(adapterPosition, dogs[adapterPosition])
+            } else if (p0 != null && petType == "Cat") {
+                // move the action out to outside of this class
+                callBackCat?.onPetClicked(adapterPosition, cats[adapterPosition])
+            }
         }
     }
 
