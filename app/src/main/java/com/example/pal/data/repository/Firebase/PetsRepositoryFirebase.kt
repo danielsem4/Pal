@@ -1,6 +1,7 @@
 package com.example.pal.data.repository.Firebase
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
@@ -19,10 +20,14 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
     // the system language
     private val language = Locale.getDefault().language.toString()
 
-    // the pets collection
+    // the pets collection reference, the pets for adoption
     private var petsRef = FirebaseFirestore.getInstance().collection("pets")
 
+    // the dog collection reference, the dogs info by breed
     private val dogsRef = FirebaseFirestore.getInstance().collection("dogs")
+
+    // users collection reference (in the Firestore)
+    private val userRef = FirebaseFirestore.getInstance().collection("user")
 
 
     // get pets filtered by animal type
@@ -66,30 +71,25 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
         }
     }
 
-    /*
-        override suspend fun getPet(id: Int): Resource<Pet> {
-            if (language == "iw")
-                petsRef = FirebaseFirestore.getInstance().collection("petsHW")
-            return safeCall {
-                val pet =petsRef.document().id
+    override suspend fun findDogByBreed(breed: String): Resource<Dog> {
 
-                Resource.success(petG!!)
-            }
+        return safeCall {
+            // Retrieve the document with the given breed
+            val query = dogsRef.whereEqualTo("Breed", breed)
+            val document = query.get().await()
+
+            // Convert the document to Dog type object
+            val dog = document.documents[0].toObject(Dog::class.java)
+
+            Resource.success(dog!!)
         }
-    */
-    override suspend fun findDogByBreed(breed: String): Resource<Void> {
-        TODO("Not yet implemented")
     }
-
-
 
     // get the dog info by breed
     override suspend fun getDogs(): Resource<List<Dog>> {
 
         return safeCall {
             val snapshot = dogsRef.get().await()
-
-
             val dogsList = mutableListOf<Dog>()
 
             // iterate on the snapshot i got and convert it to Pet object and push it to the petsList
@@ -102,24 +102,8 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
         }
     }
 
-    override fun getPetsLiveData(data: MutableLiveData<Resource<List<Pet>>>) {
-
-        data.postValue(Resource.loading())
-
-        petsRef.orderBy("animal").addSnapshotListener { snapshot, error ->
-
-            if (error != null) {
-                data.postValue(error.localizedMessage?.let { Resource.error(it) })
-            }
-            if (snapshot != null && !snapshot.isEmpty) {
-                data.postValue(Resource.success(snapshot.toObjects(Pet::class.java)))
-            }
-
-            else {
-                data.postValue(Resource.error("No Data"))
-            }
-        }
-
+    override suspend fun getFavorites(): Resource<List<Pet>> {
+        TODO()
     }
 
 }

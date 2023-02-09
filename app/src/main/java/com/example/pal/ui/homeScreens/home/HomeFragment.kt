@@ -77,17 +77,14 @@ class HomeFragment : Fragment() {
 
 
         binding.homeRecycler.adapter = HomeAdapter(object :  HomeAdapter.PetsListener {
-            override fun onPetClicked(index: Int,petId:Int) {
+            override fun onPetClicked(index: Int, petId: Int) {
 
                 imageList.clear()
+                //when pressing on a pet we passing the id of the dog to single pet fragment
                 findNavController().navigate(R.id.action_homeFragment_to_singlePet,
-               bundleOf("petId" to petId))//when pressing on a pet we passing the id of the dog to single pet fragment
-
-
+                    bundleOf("petId" to petId))
             }
-
         })
-
 
         viewModel.petBen.observe(viewLifecycleOwner){
             when (it.status) {
