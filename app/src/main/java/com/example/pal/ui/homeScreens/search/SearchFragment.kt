@@ -19,7 +19,7 @@ import com.example.pal.ui.MainActivityViewModel
 
 import com.example.pal.util.Loading
 
-import com.example.pal.ui.homeScreens.home.HomeAdapter
+import com.example.pal.ui.homeScreens.search.home.HomeAdapter
 import com.example.pal.ui.signin.LoginViewModel
 import com.google.api.ResourceProto.resource
 
