@@ -11,7 +11,7 @@ import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
 @AndroidEntryPoint
 class TermsFragment : Fragment() {
-    private var binding : FragmentTermsBinding by autoCleared()
+    private var binding: FragmentTermsBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,

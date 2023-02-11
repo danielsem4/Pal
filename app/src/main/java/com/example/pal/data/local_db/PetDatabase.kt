@@ -7,26 +7,27 @@ import androidx.room.RoomDatabase
 import com.example.pal.data.models.Pet
 
 @Database(entities = [Pet::class], version = 1, exportSchema = false)
-abstract class PetDatabase :RoomDatabase(){
+abstract class PetDatabase : RoomDatabase() {
 
-    abstract fun petDao():PetDao
+    abstract fun petDao(): PetDao
 
-    companion object{
+    companion object {
 
         @Volatile
-        private var instance:PetDatabase?=null
+        private var instance: PetDatabase? = null
 
-        fun getDatabase(context: Context) :PetDatabase{
-           return instance?: synchronized(this){
-                Room.databaseBuilder(context.applicationContext,
+        fun getDatabase(context: Context): PetDatabase {
+
+            return instance ?: synchronized(this) {
+                Room.databaseBuilder(
+                    context.applicationContext,
                     PetDatabase::class.java,
-                    "pets_tablee")
+                    "pets_table"
+                )
                     .fallbackToDestructiveMigration().build().also {
-                        instance=it
+                        instance = it
                     }
             }
         }
-
     }
-
 }

@@ -12,10 +12,10 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val dogsRep: PetsRepository) : ViewModel() {
 
     // the dogs ref
-    private val _dogs : MutableLiveData<Resource<List<Dog>>> = MutableLiveData()
+    private val _dogs: MutableLiveData<Resource<List<Dog>>> = MutableLiveData()
 
     // the dogs ref we expose
-    val dogs : LiveData<Resource<List<Dog>>> = _dogs
+    val dogs: LiveData<Resource<List<Dog>>> = _dogs
 
     // set the dogs array with the get dogs fun from the Pet repository
     fun getDogs() {

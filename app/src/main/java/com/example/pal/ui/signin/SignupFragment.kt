@@ -22,12 +22,12 @@ import com.example.pal.util.Success
 @AndroidEntryPoint
 class SignupFragment : Fragment() {
 
-    private var binding : FragmentSignupBinding by autoCleared()
+    private var binding: FragmentSignupBinding by autoCleared()
 
-    private val viewModel : SignupViewModel by viewModels()
+    private val viewModel: SignupViewModel by viewModels()
 
     // the activity viewModel
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,12 +38,13 @@ class SignupFragment : Fragment() {
         binding = FragmentSignupBinding.inflate(inflater, container, false)
 
         // pass the data to the ViewModel
-        binding.signInBtn.setOnClickListener{
+        binding.signInBtn.setOnClickListener {
             viewModel.createUser(
                 binding.nameSignIn.text.toString(),
                 binding.emailSignIn.text.toString(),
                 binding.phoneSignIn.text.toString(),
-                binding.passwordSignIn.text.toString())
+                binding.passwordSignIn.text.toString()
+            )
         }
 
         return binding.root
@@ -54,21 +55,22 @@ class SignupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel.userRegistrationStatus.observe(viewLifecycleOwner){
+        viewModel.userRegistrationStatus.observe(viewLifecycleOwner) {
 
-            when(it.status){
+            when (it.status) {
 
                 // when the user status is loading we will show the loading anim ui
                 is Loading -> {
                     binding.signUpUi.isVisible = false
                     binding.signUpLoading.isVisible = true
-                    Toast.makeText(requireContext(),"Loading",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
 
                 // when the user status is success we will move to the next page and reset the ui
                 is Success
-                ->{
-                    Toast.makeText(requireContext(),"Registration successful",Toast.LENGTH_SHORT).show()
+                -> {
+                    Toast.makeText(requireContext(), "Registration successful", Toast.LENGTH_SHORT)
+                        .show()
 
                     // set the user status true (marked as logged in)
                     activityViewModel.setUserStatus(true)
@@ -78,8 +80,8 @@ class SignupFragment : Fragment() {
                 }
 
                 // if the user status is failed we will pop up the message and wont change the ui
-                is Error ->{
-                    Toast.makeText(requireContext(),it.status.message,Toast.LENGTH_SHORT).show()
+                is Error -> {
+                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
                     binding.signUpUi.isVisible = true
                     binding.signUpLoading.isVisible = false
                 }

@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
 @AndroidEntryPoint
-class ChangePasswordFragment : Fragment(){
-    private var binding : FragmentChangePasswordBinding by autoCleared()
+class ChangePasswordFragment : Fragment() {
+    private var binding: FragmentChangePasswordBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,

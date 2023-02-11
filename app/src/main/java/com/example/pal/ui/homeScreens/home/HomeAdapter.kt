@@ -9,12 +9,12 @@ import com.bumptech.glide.Glide
 import com.example.pal.data.models.Pet
 import com.example.pal.databinding.HomeItemBinding
 
-class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<HomeAdapter.PetViewHolder>(){
+class HomeAdapter(private val callBack: PetsListener) :
+    RecyclerView.Adapter<HomeAdapter.PetViewHolder>() {
 
     // the pets array list
     private val pets = ArrayList<Pet>()
 
-    //lateinit var pet: Pet
     // set the pets
     @SuppressLint("NotifyDataSetChanged")
     fun setPets(pets: Collection<Pet>) {
@@ -64,12 +64,14 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
     }
 
     // the 3 functions of the HomeAdapter
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder = PetViewHolder (
-            HomeItemBinding.inflate(LayoutInflater.from(parent.context),
-            parent,
-            false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder =
+        PetViewHolder(
+            HomeItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-    )
 
     override fun onBindViewHolder(holder: PetViewHolder, position: Int) =
         // the function that bind the data to the view from the inner class

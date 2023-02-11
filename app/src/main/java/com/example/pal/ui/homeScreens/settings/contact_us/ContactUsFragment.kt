@@ -11,7 +11,7 @@ import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 
 @AndroidEntryPoint
 class ContactUsFragment : Fragment() {
-    private var binding : FragmentContactUsBinding by autoCleared()
+    private var binding: FragmentContactUsBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,

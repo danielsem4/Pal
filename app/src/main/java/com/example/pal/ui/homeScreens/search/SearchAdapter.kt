@@ -10,9 +10,10 @@ import com.example.pal.data.models.Cat
 import com.example.pal.data.models.Dog
 import com.example.pal.databinding.SearchItemBinding
 
-class SearchAdapter(private val callBackDog: DogsListener?, private val callBackCat: CatsListener?,
-                    private val petType: String)
-    : RecyclerView.Adapter<SearchAdapter.PetViewHolder>(){
+class SearchAdapter(
+    private val callBackDog: DogsListener?, private val callBackCat: CatsListener?,
+    private val petType: String
+) : RecyclerView.Adapter<SearchAdapter.PetViewHolder>() {
 
     private val dogs = ArrayList<Dog>()
     private val cats = ArrayList<Cat>()
@@ -68,7 +69,8 @@ class SearchAdapter(private val callBackDog: DogsListener?, private val callBack
         fun bindCat(cat: Cat) {
             binding.itemBreed.text = cat.breed
             binding.itemWeight.text = ((cat.max_weight + cat.min_weight) / 2).toString()
-            binding.itemLifeSpan.text = ((cat.max_life_expectancy + cat.min_life_expectancy) / 2).toString()
+            binding.itemLifeSpan.text =
+                ((cat.max_life_expectancy + cat.min_life_expectancy) / 2).toString()
 
             Glide.with(binding.root).load(cat.pic).into(binding.itemPic)
 
@@ -87,29 +89,28 @@ class SearchAdapter(private val callBackDog: DogsListener?, private val callBack
     }
 
     // the 3 functions of the HomeAdapter
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder = PetViewHolder (
-        SearchItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder =
+        PetViewHolder(
+            SearchItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-    )
 
     override fun onBindViewHolder(holder: PetViewHolder, position: Int) =
         // the function that bind the data to the view from the inner class
-        if(petType == "Dog") {
+        if (petType == "Dog") {
             holder.bindDog(dogs[position])
         } else {
             holder.bindCat(cats[position])
         }
 
 
-
     override fun getItemCount() =
-        if(petType == "Dog") {
+        if (petType == "Dog") {
             dogs.size
         } else {
             cats.size
         }
-
 }
