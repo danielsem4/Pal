@@ -27,7 +27,7 @@ class SinglePetInfo : Fragment() {
     private var binding: FragmentSinglePetInfoBinding by autoCleared()
 
     // the activity viewModel
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,8 @@ class SinglePetInfo : Fragment() {
         activityViewModel
 
         // the bottom menu ref, and set the manu to be visible every time we come back to this screen
-        val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        val navigationBar =
+            (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = false
 
         return binding.root
@@ -53,7 +54,7 @@ class SinglePetInfo : Fragment() {
         // the dog rating category name
         val parameters = this.resources.getStringArray(R.array.parameters)
 
-        if(activityViewModel.petType == "Cat") {
+        if (activityViewModel.petType == "Cat") {
 
             val cat: Cat = arguments?.getSerializable("cat") as Cat
         } else {
@@ -104,7 +105,6 @@ class SinglePetInfo : Fragment() {
 
     // update the dog breed info
     private fun updateCat(cat: Cat) {
-
 
 
     }

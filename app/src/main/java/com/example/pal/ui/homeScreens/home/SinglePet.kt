@@ -28,7 +28,7 @@ class SinglePet : Fragment() {
     private val viewModel: SinglePetViewModel by viewModels()
 
     // the activity viewModel
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +42,35 @@ class SinglePet : Fragment() {
         binding.favorites.isVisible = activityViewModel.userStatus
 
         // the bottom menu ref, and set the manu to be visible every time we come back to this screen
-        val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        val navigationBar =
+            (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = false
 
+        // if the user is not in guest mode
+        if (activityViewModel.userStatus) {
 
+            // set listener to the add to favorites image button
+            binding.checkboxFavorites.setOnCheckedChangeListener { checkBox, isChecked ->
 
+                if (isChecked) {
+                    activityViewModel.updateFavorites(binding.id.text.toString())
+                    Toast.makeText(
+                        requireContext(),
+                        "Pet added to your favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                else {
+                    activityViewModel.removePetFromFavorites(binding.id.text.toString())
+                    Toast.makeText(
+                        requireContext(),
+                        "Pet Removed from your favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
         return binding.root
 
 
@@ -83,10 +107,20 @@ class SinglePet : Fragment() {
 
         binding.name.text = pet.name
         binding.sex.text = pet.sex
-        binding.age.text = pet.id.toString()
+        binding.age.text = pet.age
         binding.description.text = pet.description
         binding.breed.text = pet.breed
         Glide.with(requireContext()).load(pet.pic).circleCrop().into(binding.image)
+        binding.id.text = pet.id.toString()
+
+        if (activityViewModel.userStatus) {
+            for (id in activityViewModel.userFavorites) {
+
+                if (id == pet.id.toString()) {
+                    binding.checkboxFavorites.isChecked = true
+                }
+            }
+        }
 
     }
 }

@@ -9,17 +9,21 @@ import com.example.pal.util.Resource
 interface PetsRepository {
 
     // get dog info by breed (from dogs collection)
-    suspend fun findDogByBreed(breed: String) : Resource<Dog>
+    suspend fun findDogByBreed(breed: String): Resource<Dog>
 
     // get all pets to the home screen by animal type(dpg / cat)
-    suspend fun getPets(animal: String) : Resource<List<Pet>>
+    suspend fun getPets(animal: String): Resource<List<Pet>>
 
     // get dog info by id (on press of dog from the home screen)
-    suspend fun getPet(id: Int) : Resource<Pet>
+    suspend fun getPet(id: Int): Resource<Pet>
 
     // get the dog info by breed
-    suspend fun getDogs() : Resource<List<Dog>>
+    suspend fun getDogs(): Resource<List<Dog>>
 
-    // get the favorites pets of the user
-    suspend fun getFavorites() : Resource<List<Pet>>
+    suspend fun getAllPetsById(ids: List<String>): List<Pet>
+
+    suspend fun addToFavorites(id: String): List<String>
+
+    suspend fun removePetFromFavorites(id: String): List<String>
+
 }

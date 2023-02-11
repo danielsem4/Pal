@@ -27,7 +27,7 @@ class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModels()
 
     // the activity viewModel
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +38,8 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         // the bottom menu ref, and set the manu to be invisible every time we come back to this screen
-        val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        val navigationBar =
+            (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = false
 
         // user enter the application without an account
@@ -52,9 +53,12 @@ class LoginFragment : Fragment() {
         }
 
         // login button
-        binding.loginBtn.setOnClickListener{
+        binding.loginBtn.setOnClickListener {
 
-            viewModel.signInUser(binding.emailLogin.text.toString(),binding.passwordLogin.text.toString())
+            viewModel.signInUser(
+                binding.emailLogin.text.toString(),
+                binding.passwordLogin.text.toString()
+            )
         }
 
         return binding.root
@@ -71,7 +75,7 @@ class LoginFragment : Fragment() {
                 is Loading -> {
                     binding.loginUi.isVisible = false
                     binding.loginLoading.isVisible = true
-                    Toast.makeText(requireContext(),"Loading",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
 
                 // when the user status is success we will move to the next page and reset the ui
@@ -85,8 +89,8 @@ class LoginFragment : Fragment() {
                 }
 
                 // if the user status is failed we will pop up the message and wont change the ui
-                is Error ->{
-                    Toast.makeText(requireContext(),it.status.message,Toast.LENGTH_SHORT).show()
+                is Error -> {
+                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
                     binding.loginUi.isVisible = true
                     binding.loginLoading.isVisible = false
                 }
@@ -94,7 +98,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        viewModel.currentUser.observe(viewLifecycleOwner){
+        viewModel.currentUser.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Success -> { //if the user is still login and didn't sign-out
                     Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()

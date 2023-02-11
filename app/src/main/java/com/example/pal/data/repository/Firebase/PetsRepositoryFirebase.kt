@@ -1,21 +1,24 @@
 package com.example.pal.data.repository.Firebase
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.pal.util.Resource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import safeCall
 import java.util.*
 import javax.inject.Inject
 
 
-class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
+class PetsRepositoryFirebase @Inject constructor(private val firebaseAuth: FirebaseAuth) :
+    PetsRepository {
 
     // the system language
     private val language = Locale.getDefault().language.toString()
@@ -26,12 +29,12 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
     // the dog collection reference, the dogs info by breed
     private val dogsRef = FirebaseFirestore.getInstance().collection("dogs")
 
-    // users collection reference (in the Firestore)
-    private val userRef = FirebaseFirestore.getInstance().collection("user")
+    // the dog collection reference, the dogs info by breed
+    private val usersRef = FirebaseFirestore.getInstance().collection("user")
 
 
     // get pets filtered by animal type
-    override suspend fun getPets(animal: String) : Resource<List<Pet>> {
+    override suspend fun getPets(animal: String): Resource<List<Pet>> {
 
         if (language == "iw")
             petsRef = FirebaseFirestore.getInstance().collection("petsHW")
@@ -52,6 +55,56 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
             Resource.success(petsList)
         }
 
+    }
+
+    override suspend fun getAllPetsById(ids: List<String>): List<Pet> {
+
+        return withContext(Dispatchers.IO) {
+
+            val petsList = mutableListOf<Pet>()
+            for (id in ids) {
+                val query = petsRef.whereEqualTo("id", id.toInt())
+                println(id)
+                val snapshot = query.get().await()
+
+                val pet = snapshot.documents[0].toObject(Pet::class.java)
+                petsList.add(pet!!)
+
+            }
+            petsList
+        }
+
+    }
+
+    // add the pet to the current user favorites, store the id of the new pet in favorites field
+    override suspend fun addToFavorites(id: String) : List<String> {
+
+        return withContext(Dispatchers.IO) {
+            var successFlag = false
+            val userId = firebaseAuth.currentUser!!.uid
+            usersRef.document(userId).update("favorites", FieldValue.arrayUnion(id))
+                .addOnSuccessListener {
+                    successFlag = true
+                }.addOnFailureListener {
+                    successFlag = false
+                }
+            usersRef.document(userId).get().await().get("favorites") as List<String>
+        }
+    }
+
+    // remove the pet from the current user favorites, remove the id of the pet from favorites field
+    override suspend fun removePetFromFavorites(id: String): List<String> {
+        return withContext(Dispatchers.IO) {
+            var successFlag = false
+            val userId = firebaseAuth.currentUser!!.uid
+            usersRef.document(userId).update("favorites", FieldValue.arrayRemove(id))
+                .addOnSuccessListener {
+                    successFlag = true
+                }.addOnFailureListener {
+                    successFlag = false
+                }
+            usersRef.document(userId).get().await().get("favorites") as List<String>
+        }
     }
 
     override suspend fun getPet(id: Int): Resource<Pet> {
@@ -100,10 +153,6 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
             Resource.success(dogsList)
 
         }
-    }
-
-    override suspend fun getFavorites(): Resource<List<Pet>> {
-        TODO()
     }
 
 }

@@ -28,6 +28,9 @@
             app:popExitAnim="@anim/move_down"
             app:popUpTo="@id/home_nav"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_singlePet"
+            app:destination="@id/singlePet" />
     </fragment>
     <fragment
         android:id="@+id/SettingsFragment"

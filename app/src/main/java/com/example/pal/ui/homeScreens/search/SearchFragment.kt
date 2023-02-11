@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -17,6 +18,7 @@ import com.example.pal.R
 import com.example.pal.data.models.Cat
 import com.example.pal.data.models.Dog
 import com.example.pal.databinding.FragmentSearchBinding
+import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
 
 import com.example.pal.util.Loading
@@ -29,12 +31,12 @@ import com.example.pal.util.Success
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private var binding : FragmentSearchBinding by autoCleared()
+    private var binding: FragmentSearchBinding by autoCleared()
 
-    private val viewModel : SearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
 
     // the activity viewModel
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -44,6 +46,11 @@ class SearchFragment : Fragment() {
     ): View? {
 
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+
+        // the bottom menu ref, and set the manu to be visible every time we come back to this screen
+        val navigationBar =
+            (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        navigationBar.isVisible = true
 
         // get the dogs info from the firebase
         viewModel.getDogs()
@@ -67,21 +74,27 @@ class SearchFragment : Fragment() {
 
                     bundle.putSerializable("dog", dog)
 
-                    findNavController().navigate(R.id.action_searchFragment_to_singlePetInfo, bundle)
+                    findNavController().navigate(
+                        R.id.action_searchFragment_to_singlePetInfo,
+                        bundle
+                    )
                 }
-            },null ,activityViewModel.petType)
+            }, null, activityViewModel.petType)
         } else {
-            binding.searchRecycler.adapter = SearchAdapter(null, object : SearchAdapter.CatsListener {
+            binding.searchRecycler.adapter =
+                SearchAdapter(null, object : SearchAdapter.CatsListener {
 
-                override fun onPetClicked(index: Int, cat: Cat) {
+                    override fun onPetClicked(index: Int, cat: Cat) {
 
-                    bundle.putSerializable("cat", cat)
+                        bundle.putSerializable("cat", cat)
 
-                    findNavController().navigate(R.id.action_searchFragment_to_singlePetInfo, bundle)
-                }
-            }, activityViewModel.petType)
+                        findNavController().navigate(
+                            R.id.action_searchFragment_to_singlePetInfo,
+                            bundle
+                        )
+                    }
+                }, activityViewModel.petType)
         }
-
 
         // Observe the dogs LiveData
         viewModel.dogs.observe(viewLifecycleOwner) {
@@ -100,7 +113,7 @@ class SearchFragment : Fragment() {
                 }
 
                 is Error -> {
-                    Toast.makeText(requireContext(),"No such a breed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT).show()
                     binding.searchLoading.isVisible = false
                     binding.searchPage.isVisible = false
                 }
@@ -108,5 +121,31 @@ class SearchFragment : Fragment() {
                 else -> {}
             }
         }
+
+        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                // check if the user typed something
+                if (newText != null) {
+                    if (activityViewModel.petType == "Dog") {
+                        val filteredDogs = viewModel.dogs.value?.status?.data?.filter {
+                            it.Breed.toLowerCase().contains(newText.toLowerCase())
+                        }
+                        if (filteredDogs != null) {
+                            (binding.searchRecycler.adapter as SearchAdapter).setDogs(filteredDogs)
+                        }
+                    } else {
+                        TODO()
+                    }
+                }
+                return false
+            }
+        })
     }
 }
