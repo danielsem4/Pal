@@ -1,32 +1,40 @@
 package com.example.pal.data.repository.Firebase
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+
 import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetsRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.pal.util.Resource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import safeCall
 import java.util.*
 import javax.inject.Inject
 
 
-class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
+class PetsRepositoryFirebase @Inject constructor(private val firebaseAuth: FirebaseAuth) :
+    PetsRepository {
 
     // the system language
     private val language = Locale.getDefault().language.toString()
 
-    // the pets collection
+    // the pets collection reference, the pets for adoption
     private var petsRef = FirebaseFirestore.getInstance().collection("pets")
 
+    // the dog collection reference, the dogs info by breed
     private val dogsRef = FirebaseFirestore.getInstance().collection("dogs")
+
+    // the dog collection reference, the dogs info by breed
+    private val usersRef = FirebaseFirestore.getInstance().collection("user")
 
 
     // get pets filtered by animal type
-    override suspend fun getPets(animal: String) : Resource<List<Pet>> {
+    override suspend fun getPets(animal: String): Resource<List<Pet>> {
 
         if (language == "iw")
             petsRef = FirebaseFirestore.getInstance().collection("petsHW")
@@ -49,6 +57,56 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
 
     }
 
+    override suspend fun getAllPetsById(ids: List<String>): List<Pet> {
+
+        return withContext(Dispatchers.IO) {
+
+            val petsList = mutableListOf<Pet>()
+            for (id in ids) {
+                val query = petsRef.whereEqualTo("id", id.toInt())
+                println(id)
+                val snapshot = query.get().await()
+
+                val pet = snapshot.documents[0].toObject(Pet::class.java)
+                petsList.add(pet!!)
+
+            }
+            petsList
+        }
+
+    }
+
+    // add the pet to the current user favorites, store the id of the new pet in favorites field
+    override suspend fun addToFavorites(id: String) : List<String> {
+
+        return withContext(Dispatchers.IO) {
+            var successFlag = false
+            val userId = firebaseAuth.currentUser!!.uid
+            usersRef.document(userId).update("favorites", FieldValue.arrayUnion(id))
+                .addOnSuccessListener {
+                    successFlag = true
+                }.addOnFailureListener {
+                    successFlag = false
+                }
+            usersRef.document(userId).get().await().get("favorites") as List<String>
+        }
+    }
+
+    // remove the pet from the current user favorites, remove the id of the pet from favorites field
+    override suspend fun removePetFromFavorites(id: String): List<String> {
+        return withContext(Dispatchers.IO) {
+            var successFlag = false
+            val userId = firebaseAuth.currentUser!!.uid
+            usersRef.document(userId).update("favorites", FieldValue.arrayRemove(id))
+                .addOnSuccessListener {
+                    successFlag = true
+                }.addOnFailureListener {
+                    successFlag = false
+                }
+            usersRef.document(userId).get().await().get("favorites") as List<String>
+        }
+    }
+
     override suspend fun getPet(id: Int): Resource<Pet> {
 
         if (language == "iw")
@@ -66,30 +124,25 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
         }
     }
 
-    /*
-        override suspend fun getPet(id: Int): Resource<Pet> {
-            if (language == "iw")
-                petsRef = FirebaseFirestore.getInstance().collection("petsHW")
-            return safeCall {
-                val pet =petsRef.document().id
+    override suspend fun findDogByBreed(breed: String): Resource<Dog> {
 
-                Resource.success(petG!!)
-            }
+        return safeCall {
+            // Retrieve the document with the given breed
+            val query = dogsRef.whereEqualTo("Breed", breed)
+            val document = query.get().await()
+
+            // Convert the document to Dog type object
+            val dog = document.documents[0].toObject(Dog::class.java)
+
+            Resource.success(dog!!)
         }
-    */
-    override suspend fun findDogByBreed(breed: String): Resource<Void> {
-        TODO("Not yet implemented")
     }
-
-
 
     // get the dog info by breed
     override suspend fun getDogs(): Resource<List<Dog>> {
 
         return safeCall {
             val snapshot = dogsRef.get().await()
-
-
             val dogsList = mutableListOf<Dog>()
 
             // iterate on the snapshot i got and convert it to Pet object and push it to the petsList
@@ -100,26 +153,6 @@ class PetsRepositoryFirebase @Inject constructor() : PetsRepository {
             Resource.success(dogsList)
 
         }
-    }
-
-    override fun getPetsLiveData(data: MutableLiveData<Resource<List<Pet>>>) {
-
-        data.postValue(Resource.loading())
-
-        petsRef.orderBy("animal").addSnapshotListener { snapshot, error ->
-
-            if (error != null) {
-                data.postValue(error.localizedMessage?.let { Resource.error(it) })
-            }
-            if (snapshot != null && !snapshot.isEmpty) {
-                data.postValue(Resource.success(snapshot.toObjects(Pet::class.java)))
-            }
-
-            else {
-                data.postValue(Resource.error("No Data"))
-            }
-        }
-
     }
 
 }

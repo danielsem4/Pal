@@ -18,23 +18,21 @@ class SignupViewModel @Inject constructor(private val repository: AuthRepository
     // listener to the user status
     val userRegistrationStatus: LiveData<Resource<User>> = _userRegistrationStatus
 
-    fun createUser(userName: String, userEmail: String, userPhone: String, userPass: String){
+    fun createUser(userName: String, userEmail: String, userPhone: String, userPass: String) {
 
         // check that the fields are not empty
-        val error = if(userEmail.isNotEmpty() || userPass.isNotEmpty() ||
-                       userName.isNotEmpty() || userPhone.isEmpty())
+        val error = if (userEmail.isNotEmpty() || userPass.isNotEmpty() ||
+            userName.isNotEmpty() || userPhone.isEmpty()
+        )
             "empty String"
 
         // check if the user email is valid
-        else if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches())
+        else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches())
             "Not a valid Email"
-
-        else if(userPass.length < 6)
+        else if (userPass.length < 6)
             "password should have minimum 6 digits"
-
-        else if(userPhone.length != 10)
+        else if (userPhone.length != 10)
             "Invalid phone number"
-
         else null
 
         // approach to firebase

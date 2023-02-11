@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: AuthRepository): ViewModel() {
+class LoginViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
 
     // the user status
     private val _userSignInStatus = MutableLiveData<Resource<User>>()
@@ -23,7 +23,6 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
     // expose access to the user
     val currentUser: LiveData<Resource<User>> = _currentUser
 
-
     init {
         viewModelScope.launch {
             _currentUser.postValue(Resource.loading()) // started to load the user
@@ -31,12 +30,11 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
         }
     }
 
-    fun signInUser(userEmail: String, userPass: String){
-        if(userEmail.isEmpty() || userPass.isEmpty()) {
+    fun signInUser(userEmail: String, userPass: String) {
+        if (userEmail.isEmpty() || userPass.isEmpty()) {
             _userSignInStatus.postValue(Resource.error("Empty email or password\n please try again"))
 
-        }
-        else{
+        } else {
             _userSignInStatus.postValue(Resource.loading()) // started to load the user
             viewModelScope.launch {
                 val loginResult = repository.login(userEmail, userPass)

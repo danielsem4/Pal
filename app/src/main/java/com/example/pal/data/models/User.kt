@@ -1,4 +1,13 @@
 package com.example.pal.data.models
 
-data class User(val name: String = "",val email: String = "",val phone: String? = "",
-                val favorites: ArrayList<String>? = ArrayList())
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "users_table")
+data class User(
+    val name: String = "",
+    @PrimaryKey
+    val email: String = "",
+    val phone: String? = "",
+    val favorites: ArrayList<String>? = ArrayList()
+)

@@ -9,12 +9,12 @@ import com.bumptech.glide.Glide
 import com.example.pal.data.models.Pet
 import com.example.pal.databinding.HomeItemBinding
 
-class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<HomeAdapter.PetViewHolder>(){
+class HomeAdapter(private val callBack: PetsListener) :
+    RecyclerView.Adapter<HomeAdapter.PetViewHolder>() {
 
     // the pets array list
     private val pets = ArrayList<Pet>()
 
-    //lateinit var pet: Pet
     // set the pets
     @SuppressLint("NotifyDataSetChanged")
     fun setPets(pets: Collection<Pet>) {
@@ -25,7 +25,7 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
 
     // listen to the actions on click
     interface PetsListener {
-        fun onPetClicked(index: Int,petId:Int)
+        fun onPetClicked(index: Int, petId: Int)
     }
 
     // hold the view and bind it to the information with bind fun
@@ -53,22 +53,25 @@ class HomeAdapter(private val callBack: PetsListener) : RecyclerView.Adapter<Hom
         override fun onClick(p0: View?) {
 
             // move the action out to outside of this class
-            //callBack.onPetClicked(adapterPosition)
+            // callBack.onPetClicked(adapterPosition)
             if (p0 != null) {
-                //click on the recycler we take the position and the id of the pet in the same postion
-                callBack.onPetClicked(adapterPosition,pets[adapterPosition].id)
+                // click on the recycler we take the position
+                // and the id of the pet in the same position
+                callBack.onPetClicked(adapterPosition, pets[adapterPosition].id)
             }
 
         }
     }
 
     // the 3 functions of the HomeAdapter
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder = PetViewHolder (
-            HomeItemBinding.inflate(LayoutInflater.from(parent.context),
-            parent,
-            false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder =
+        PetViewHolder(
+            HomeItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-    )
 
     override fun onBindViewHolder(holder: PetViewHolder, position: Int) =
         // the function that bind the data to the view from the inner class

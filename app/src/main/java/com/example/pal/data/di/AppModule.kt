@@ -33,22 +33,19 @@ class AppModule {
     // pet repo provider
     @Provides
 
-    fun providePetsRepositoryFirebase(): PetsRepository = PetsRepositoryFirebase()
-
-    //@Provides
-   // fun providePetsRepositoryR(): PetRepositoryR = PetRepositoryR()
+    fun providePetsRepositoryFirebase(): PetsRepository =
+        PetsRepositoryFirebase(firebaseAuth = FirebaseAuth.getInstance())
 
 
     //local db
     @Provides
     @Singleton
-    fun provideLocalDataBase(@ApplicationContext appContext: Context) : PetDatabase =
+    fun provideLocalDataBase(@ApplicationContext appContext: Context): PetDatabase =
         PetDatabase.getDatabase(appContext)//return the pet database
 
     @Provides
     @Singleton
     fun providePetDao(database: PetDatabase) = database.petDao()
-
 
 
 }

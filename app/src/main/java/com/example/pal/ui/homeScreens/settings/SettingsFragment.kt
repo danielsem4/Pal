@@ -24,12 +24,12 @@ import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
-    private var binding : FragmentSettingsBinding by autoCleared()
+    private var binding: FragmentSettingsBinding by autoCleared()
 
-    private val viewModel : LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     // the activity viewModel
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -44,10 +44,12 @@ class SettingsFragment : Fragment() {
         val settingsButtonsNames = this.resources.getStringArray(R.array.settings)
 
         // the right arrow on the buttons
-        val rightDrawable = getDrawable(requireContext(), R.drawable.ic_baseline_arrow_forward_ios_24)
+        val rightDrawable =
+            getDrawable(requireContext(), R.drawable.ic_baseline_arrow_forward_ios_24)
 
         // the bottom menu ref, and set the manu to be visible every time we come back to this screen
-        val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        val navigationBar =
+            (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = true
 
 
@@ -60,12 +62,14 @@ class SettingsFragment : Fragment() {
         // Contact Us
         binding.settingsContactUs.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
             getDrawable(requireContext(), R.drawable.ic_baseline_alternate_email_24),
-            null, rightDrawable, null)
+            null, rightDrawable, null
+        )
 
         // Terms
         binding.settingsTerms.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
             getDrawable(requireContext(), R.drawable.ic_baseline_terms_file_24),
-            null, rightDrawable, null)
+            null, rightDrawable, null
+        )
 
         // terms button
         binding.settingsTerms.settingsBtn.setOnClickListener {
@@ -102,17 +106,20 @@ class SettingsFragment : Fragment() {
             // Change password
             binding.settingsChangePassword.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
                 getDrawable(requireContext(), R.drawable.ic_baseline_lock_24),
-                null, rightDrawable, null)
+                null, rightDrawable, null
+            )
 
             // Delete user
             binding.settingsDeleteUser.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
                 getDrawable(requireContext(), R.drawable.ic_baseline_delete_24),
-                null, rightDrawable, null)
+                null, rightDrawable, null
+            )
 
             // Sign out
             binding.settingsSignOut.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
                 getDrawable(requireContext(), R.drawable.ic_baseline_logout_24),
-                null, rightDrawable, null)
+                null, rightDrawable, null
+            )
 
             // set the buttons actions
 
@@ -144,7 +151,8 @@ class SettingsFragment : Fragment() {
             // Log in
             binding.settingsLogIn.settingsBtnText.setCompoundDrawablesWithIntrinsicBounds(
                 getDrawable(requireContext(), R.drawable.ic_baseline_login_24),
-                null, rightDrawable, null)
+                null, rightDrawable, null
+            )
 
             // Log in button
             binding.settingsLogIn.settingsBtn.setOnClickListener {
@@ -156,7 +164,4 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

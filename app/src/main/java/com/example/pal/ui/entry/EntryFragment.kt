@@ -22,9 +22,9 @@ import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 @AndroidEntryPoint
 class EntryFragment : Fragment() {
 
-    private var binding : FragmentEntryBinding by autoCleared()
+    private var binding: FragmentEntryBinding by autoCleared()
 
-    private val activityViewModel : MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -36,7 +36,8 @@ class EntryFragment : Fragment() {
         binding = FragmentEntryBinding.inflate(inflater, container, false)
 
         // the bottom menu ref, and set the manu to be invisible every time we come back to this screen
-        val navigationBar = (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
+        val navigationBar =
+            (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = false
 
         // on press moving to the dog section (Home screen with dogs for adoption)
@@ -48,7 +49,7 @@ class EntryFragment : Fragment() {
         }
 
         // on press moving to the cat section (Home screen with cats for adoption)
-        binding.catSection.setOnClickListener{
+        binding.catSection.setOnClickListener {
 
             //set the animal type to cat
             activityViewModel.setAnimalType("Cat")
@@ -59,7 +60,4 @@ class EntryFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }
