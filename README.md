@@ -15,3 +15,7 @@ The app has been developed using the Kotlin programming language and utilizes va
 - Firebase (for authentication and adoption listing)
 - Room (for local data storage)
 - Hilt (for dependency injection)
+
+## 
+
+We utilized a web crawling technique using Python to extract information from the dog breed profiles on the https://dogtime.com/dog-breeds/profiles website. The data was then stored in Firebase Firestore, a cloud-based NoSQL database. In addition, we also gathered information about cats and stored it in an Express.js-based web server. The server was hosted on Render, a cloud platform for web applications, ensuring reliable and accessible storage of the data.
