@@ -23,7 +23,7 @@ abstract class CatDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     CatDatabase::class.java,
-                    "cats_table"
+                    "cat_table"
                 )
                     .fallbackToDestructiveMigration().build().also {
                         instance = it

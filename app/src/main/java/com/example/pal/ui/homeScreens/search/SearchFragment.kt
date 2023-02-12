@@ -127,8 +127,16 @@ class SearchFragment : Fragment() {
                     is Success -> {
                         binding.searchPage.isVisible = true
                         binding.searchLoading.isVisible = false
-                        println(viewModel.cats.value?.status?.data)
-                        (binding.searchRecycler.adapter as SearchAdapter).setCats(it.status.data!!)
+                        println(it.status.data)
+                        if(!it.status.data.isNullOrEmpty()) {
+                            (binding.searchRecycler.adapter as SearchAdapter).setCats(it.status.data!!)
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Error, no data sent\ntry again",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
 
                     is Error -> {

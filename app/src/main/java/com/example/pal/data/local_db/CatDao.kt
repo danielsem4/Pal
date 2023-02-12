@@ -11,10 +11,10 @@ import com.example.pal.data.models.Cat
 @Dao
 interface CatDao {
 
-    @Query("SELECT * FROM cats_table")
+    @Query("SELECT * FROM cat_table")
     fun getAllCats(): LiveData<List<Cat>>
 
-    @Query("SELECT * FROM cats_table WHERE name = :name")
+    @Query("SELECT * FROM cat_table WHERE name = :name")
     fun getCat(name: String): LiveData<Cat>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
