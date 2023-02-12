@@ -1,4 +1,4 @@
-package com.example.pal.data.repository
+package com.example.pal.data.remote_db.Firebase
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

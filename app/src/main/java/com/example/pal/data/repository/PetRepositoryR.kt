@@ -2,11 +2,10 @@ package com.example.pal.data.repository
 
 
 import com.example.pal.data.local_db.PetDao
-import com.example.pal.data.repository.Firebase.PetsRepositoryFirebase
+import com.example.pal.data.remote_db.Firebase.PetsRepositoryFirebase
 import com.example.pal.util.performFetchingAndSaving
 import javax.inject.Inject
 import javax.inject.Singleton
-import javax.sql.CommonDataSource
 
 @Singleton
 class PetRepositoryR @Inject constructor(
@@ -25,12 +24,6 @@ class PetRepositoryR @Inject constructor(
         { remoteDataSource.getPet(id) },
         { localDataSource.insertPet(it) }
     )
-
-//    fun getUserFavorites(id: String) = performFetchingAndSaving(
-//        { localDataSource.getPet(id) },
-//        { remoteDataSource.getPet(id) },
-//        { localDataSource.insertPet(it) }
-//    )
 
 }
 

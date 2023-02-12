@@ -1,7 +1,6 @@
-package com.example.pal.data.repository.Firebase
+package com.example.pal.data.remote_db.Firebase
 
 import com.example.pal.data.models.User
-import com.example.pal.data.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.pal.util.Resource
@@ -10,7 +9,6 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import safeCall
 import javax.inject.Inject
-
 
 class AuthRepositoryFirebase @Inject constructor(private val firebaseAuth: FirebaseAuth) :
     AuthRepository {

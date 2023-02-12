@@ -8,14 +8,12 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.pal.R
-import com.example.pal.data.repository.Firebase.PetsRepositoryFirebase
 import com.example.pal.databinding.FragmentEntryBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
-import com.example.pal.ui.homeScreens.search.home.HomeViewModel
+
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 

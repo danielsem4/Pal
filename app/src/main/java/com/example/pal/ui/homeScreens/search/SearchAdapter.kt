@@ -34,16 +34,6 @@ class SearchAdapter(
         notifyDataSetChanged()
     }
 
-    // listen to the actions on click
-    interface DogsListener {
-        fun onPetClicked(index: Int, dog: Dog)
-    }
-
-    // listen to the actions on click
-    interface CatsListener {
-        fun onPetClicked(index: Int, cat: Cat)
-    }
-
     // hold the view and bind it to the information with bind fun
     inner class PetViewHolder(private val binding: SearchItemBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
@@ -67,12 +57,12 @@ class SearchAdapter(
         // bind the cat data to the view
         @SuppressLint("SetTextI18n")
         fun bindCat(cat: Cat) {
-            binding.itemBreed.text = cat.breed
+            binding.itemBreed.text = cat.name
             binding.itemWeight.text = ((cat.max_weight + cat.min_weight) / 2).toString()
             binding.itemLifeSpan.text =
                 ((cat.max_life_expectancy + cat.min_life_expectancy) / 2).toString()
 
-            Glide.with(binding.root).load(cat.pic).into(binding.itemPic)
+            Glide.with(binding.root).load(cat.image_link).into(binding.itemPic)
 
         }
 
@@ -80,10 +70,10 @@ class SearchAdapter(
         override fun onClick(p0: View?) {
             if (p0 != null && petType == "Dog") {
                 // move the action out to outside of this class
-                callBackDog?.onPetClicked(adapterPosition, dogs[adapterPosition])
+                callBackDog?.onPetClicked(adapterPosition, dogs[adapterPosition].Breed)
             } else if (p0 != null && petType == "Cat") {
                 // move the action out to outside of this class
-                callBackCat?.onPetClicked(adapterPosition, cats[adapterPosition])
+                callBackCat?.onPetClicked(adapterPosition, cats[adapterPosition].name)
             }
         }
     }
@@ -113,4 +103,15 @@ class SearchAdapter(
         } else {
             cats.size
         }
+
+    // listen to the actions on click
+    interface DogsListener {
+        fun onPetClicked(index: Int, breed: String)
+    }
+
+    // listen to the actions on click
+    interface CatsListener {
+        fun onPetClicked(index: Int, breed: String)
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.example.pal.data.repository
+package com.example.pal.data.remote_db.Firebase
 
 import com.example.pal.data.models.User
 import com.example.pal.util.Resource

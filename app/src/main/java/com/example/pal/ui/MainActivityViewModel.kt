@@ -2,8 +2,8 @@ package com.example.pal.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pal.data.repository.AuthRepository
-import com.example.pal.data.repository.PetsRepository
+import com.example.pal.data.remote_db.Firebase.AuthRepository
+import com.example.pal.data.remote_db.Firebase.PetsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
