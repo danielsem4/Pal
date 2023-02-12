@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pal.R
 import com.example.pal.databinding.FragmentTermsBinding
 import com.example.pal.databinding.TermsItemLayoutBinding
-import com.example.pal.ui.homeScreens.search.home.HomeAdapter
+import com.example.pal.ui.homeScreens.home.HomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 

@@ -57,6 +57,9 @@ class PetsRepositoryFirebase @Inject constructor(private val firebaseAuth: Fireb
 
     override suspend fun getAllPetsById(ids: List<String>): List<Pet> {
 
+        if (language == "iw")
+            petsRef = FirebaseFirestore.getInstance().collection("petsHW")
+
         return withContext(Dispatchers.IO) {
 
             val petsList = mutableListOf<Pet>()

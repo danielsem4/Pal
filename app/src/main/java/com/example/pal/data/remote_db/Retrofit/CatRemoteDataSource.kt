@@ -7,12 +7,7 @@ class CatRemoteDataSource @Inject constructor(
 ) : BaseDataSource() {
 
     // wrap the result, will invoke it wrap the return and the get cats will return the status
-    suspend fun getCats() = getResult {
-        catsService.getAllCats()
-    }
-
-    suspend fun getCat(name: String) = getResult {
-        catsService.getCat(name)
-    }
+    suspend fun getCats() = getResult { catsService.getAllCats() }
+    suspend fun getCat(name: String) = getResult { catsService.getCat(name) }
 
 }

@@ -1,4 +1,4 @@
-package com.example.pal.ui.homeScreens.search.home
+package com.example.pal.ui.homeScreens.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle

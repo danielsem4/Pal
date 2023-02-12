@@ -12,12 +12,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(dogsRep: DogsRepository, catRepo: CatRepository) : ViewModel() {
+class SearchViewModel @Inject constructor(dogsRep: DogsRepository, catRepo: CatRepository) :
+    ViewModel() {
 
     val cats = catRepo.getCats()
 
     val dogs = dogsRep.getDogs()
-
 
 
 }

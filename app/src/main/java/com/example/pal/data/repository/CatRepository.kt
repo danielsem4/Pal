@@ -15,7 +15,7 @@ class CatRepository @Inject constructor(
     fun getCats() = performFetchingAndSaving(
         { localDataSource.getAllCats() },
         { remoteDataSource.getCats() },
-        { localDataSource.insertCats(it.cats) }
+        { localDataSource.insertCats(it) }
     )
 
     fun getCat(name: String) = performFetchingAndSaving(

@@ -71,11 +71,6 @@ class AppModule {
     fun providePetsRepositoryFirebase(): PetsRepository =
         PetsRepositoryFirebase(firebaseAuth = FirebaseAuth.getInstance())
 
-    // provides the cat service class
-    @Provides
-    fun provideCatService(retrofit: Retrofit): CatsService =
-        retrofit.create(CatsService::class.java)
-
     // Retrofit Provider, with default Gson build
     @Provides
     @Singleton
@@ -87,5 +82,10 @@ class AppModule {
     // Gson provider
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
+
+    // provides the cat service class
+    @Provides
+    fun provideCatService(retrofit: Retrofit): CatsService =
+        retrofit.create(CatsService::class.java)
 
 }
