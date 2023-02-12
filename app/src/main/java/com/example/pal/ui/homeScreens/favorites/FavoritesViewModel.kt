@@ -5,10 +5,9 @@ import androidx.lifecycle.MutableLiveData
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
 
-import com.example.pal.data.repository.PetsRepository
+import com.example.pal.data.remote_db.Firebase.PetsRepository
 import com.example.pal.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -26,4 +26,7 @@ interface PetDao {
     @Query("SELECT * FROM pets_table")
     fun getAllPets(): LiveData<List<Pet>>
 
+    @Query("SELECT * FROM pets_table WHERE id IN (:ids)")
+    fun getAllPetsById(ids: List<String>): LiveData<List<Pet>>
+
 }

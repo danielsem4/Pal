@@ -3,7 +3,6 @@ package com.example.pal.ui.homeScreens.home
 import androidx.lifecycle.*
 import com.example.pal.data.models.Pet
 import com.example.pal.data.repository.PetRepositoryR
-import com.example.pal.data.repository.PetsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.pal.util.Resource
 import kotlinx.coroutines.launch

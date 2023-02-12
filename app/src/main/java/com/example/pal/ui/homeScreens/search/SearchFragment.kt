@@ -52,9 +52,6 @@ class SearchFragment : Fragment() {
             (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = true
 
-        // get the dogs info from the firebase
-        viewModel.getDogs()
-
         return binding.root
 
     }
@@ -70,57 +67,81 @@ class SearchFragment : Fragment() {
         if (activityViewModel.petType == "Dog") {
             binding.searchRecycler.adapter = SearchAdapter(object : SearchAdapter.DogsListener {
 
-                override fun onPetClicked(index: Int, dog: Dog) {
+                override fun onPetClicked(index: Int, breed: String) {
 
-                    bundle.putSerializable("dog", dog)
 
                     findNavController().navigate(
                         R.id.action_searchFragment_to_singlePetInfo,
-                        bundle
-                    )
+                        bundleOf("breed" to breed))
                 }
             }, null, activityViewModel.petType)
+
+
+            // Observe the dogs LiveData
+            viewModel.dogs.observe(viewLifecycleOwner) {
+
+                when (it.status) {
+
+                    is Loading -> {
+                        binding.searchPage.isVisible = false
+                        binding.searchLoading.isVisible = true
+                    }
+
+                    is Success -> {
+                        binding.searchPage.isVisible = true
+                        binding.searchLoading.isVisible = false
+                        (binding.searchRecycler.adapter as SearchAdapter).setDogs(it.status.data!!)
+                    }
+
+                    is Error -> {
+                        Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT).show()
+                        binding.searchLoading.isVisible = false
+                        binding.searchPage.isVisible = false
+                    }
+
+                    else -> {}
+                }
+            }
+
         } else {
             binding.searchRecycler.adapter =
                 SearchAdapter(null, object : SearchAdapter.CatsListener {
 
-                    override fun onPetClicked(index: Int, cat: Cat) {
-
-                        bundle.putSerializable("cat", cat)
+                    override fun onPetClicked(index: Int, breed: String) {
 
                         findNavController().navigate(
                             R.id.action_searchFragment_to_singlePetInfo,
-                            bundle
-                        )
+                            bundleOf("breed" to breed))
                     }
                 }, activityViewModel.petType)
-        }
 
-        // Observe the dogs LiveData
-        viewModel.dogs.observe(viewLifecycleOwner) {
+            viewModel.cats.observe(viewLifecycleOwner) {
 
-            when (it.status) {
+                when (it.status) {
 
-                is Loading -> {
-                    binding.searchPage.isVisible = false
-                    binding.searchLoading.isVisible = true
+                    is Loading -> {
+                        binding.searchPage.isVisible = false
+                        binding.searchLoading.isVisible = true
+                    }
+
+                    is Success -> {
+                        binding.searchPage.isVisible = true
+                        binding.searchLoading.isVisible = false
+                        println(viewModel.cats.value?.status?.data)
+                        (binding.searchRecycler.adapter as SearchAdapter).setCats(it.status.data!!)
+                    }
+
+                    is Error -> {
+                        Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT).show()
+                        binding.searchLoading.isVisible = false
+                        binding.searchPage.isVisible = false
+                    }
+
+                    else -> {}
                 }
-
-                is Success -> {
-                    binding.searchPage.isVisible = true
-                    binding.searchLoading.isVisible = false
-                    (binding.searchRecycler.adapter as SearchAdapter).setDogs(it.status.data!!)
-                }
-
-                is Error -> {
-                    Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT).show()
-                    binding.searchLoading.isVisible = false
-                    binding.searchPage.isVisible = false
-                }
-
-                else -> {}
             }
         }
+
 
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
 
@@ -141,7 +162,12 @@ class SearchFragment : Fragment() {
                             (binding.searchRecycler.adapter as SearchAdapter).setDogs(filteredDogs)
                         }
                     } else {
-                        TODO()
+                        val filteredCats = viewModel.cats.value?.status?.data?.filter {
+                            it.name.toLowerCase().contains(newText.toLowerCase())
+                        }
+                        if (filteredCats != null) {
+                            (binding.searchRecycler.adapter as SearchAdapter).setCats(filteredCats)
+                        }
                     }
                 }
                 return false

@@ -1,14 +1,12 @@
-package com.example.pal.data.repository.Firebase
+package com.example.pal.data.remote_db.Firebase
 
 
 import com.example.pal.data.models.Dog
 import com.example.pal.data.models.Pet
-import com.example.pal.data.repository.PetsRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.pal.util.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext

@@ -3,7 +3,7 @@ package com.example.pal.ui.signin
 import android.util.Patterns
 import androidx.lifecycle.*
 import com.example.pal.data.models.User
-import com.example.pal.data.repository.AuthRepository
+import com.example.pal.data.remote_db.Firebase.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.pal.util.Resource
 import kotlinx.coroutines.launch

@@ -23,11 +23,6 @@ class HomeAdapter(private val callBack: PetsListener) :
         notifyDataSetChanged()
     }
 
-    // listen to the actions on click
-    interface PetsListener {
-        fun onPetClicked(index: Int, petId: Int)
-    }
-
     // hold the view and bind it to the information with bind fun
     inner class PetViewHolder(private val binding: HomeItemBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
@@ -78,5 +73,10 @@ class HomeAdapter(private val callBack: PetsListener) :
         holder.bind(pets[position])
 
     override fun getItemCount() = pets.size
+
+    // listen to the actions on click
+    interface PetsListener {
+        fun onPetClicked(index: Int, petId: Int)
+    }
 
 }

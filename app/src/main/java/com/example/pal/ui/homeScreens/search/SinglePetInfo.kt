@@ -17,6 +17,8 @@ import com.example.pal.data.models.Pet
 import com.example.pal.databinding.FragmentSinglePetInfoBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
+import com.example.pal.util.Loading
+import com.example.pal.util.Success
 
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
@@ -25,6 +27,8 @@ import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 class SinglePetInfo : Fragment() {
 
     private var binding: FragmentSinglePetInfoBinding by autoCleared()
+
+    private val viewModel: SinglePetInfoViewModel by viewModels()
 
     // the activity viewModel
     private val activityViewModel: MainActivityViewModel by activityViewModels()
@@ -54,12 +58,59 @@ class SinglePetInfo : Fragment() {
         // the dog rating category name
         val parameters = this.resources.getStringArray(R.array.parameters)
 
-        if (activityViewModel.petType == "Cat") {
+        if (activityViewModel.petType == "Dog") {
+            viewModel.dog.observe(viewLifecycleOwner) {
 
-            val cat: Cat = arguments?.getSerializable("cat") as Cat
+                when(it.status) {
+
+                    is Loading -> {
+                        binding.infoPage.isVisible = false
+
+                    }
+
+                    is Success -> {
+                        binding.infoPage.isVisible = true
+                        binding.dogsOnlyStats.isVisible = true
+                        binding.catsOnlyStats.isVisible = false
+                        updateDog(it.status.data!!, parameters)
+                    }
+
+                    is Error -> {
+                        binding.infoPage.isVisible = true
+                        Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {}
+                }
+            }
         } else {
-            val dog: Dog = arguments?.getSerializable("dog") as Dog
-            updateDog(dog, parameters)
+            viewModel.cat.observe(viewLifecycleOwner) {
+
+                when(it.status) {
+
+                    is Loading -> {
+                        binding.infoPage.isVisible = false
+
+                    }
+
+                    is Success -> {
+                        binding.infoPage.isVisible = true
+                        binding.dogsOnlyStats.isVisible = false
+                        binding.catsOnlyStats.isVisible = true
+                        updateCat(it.status.data!!, parameters)
+                    }
+
+                    is Error -> {
+                        binding.infoPage.isVisible = true
+                        Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {}
+                }
+            }
+        }
+
+
+        arguments?.getString("breed")?.let {
+            viewModel.setBreed(it, activityViewModel.petType)
         }
     }
 
@@ -104,7 +155,7 @@ class SinglePetInfo : Fragment() {
     }
 
     // update the dog breed info
-    private fun updateCat(cat: Cat) {
+    private fun updateCat(cat: Cat, parameters: Array<String>) {
 
 
     }

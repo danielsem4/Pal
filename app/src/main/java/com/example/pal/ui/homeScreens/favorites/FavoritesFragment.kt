@@ -45,7 +45,6 @@ class FavoritesFragment : Fragment() {
             viewModel.getPets(activityViewModel.userFavorites)
         }
 
-
         // navigate to the log in screen
         binding.signInFavoriteBtn.setOnClickListener {
             findNavController().navigate(R.id.action_favoritesFragment_to_loginFragment2)
