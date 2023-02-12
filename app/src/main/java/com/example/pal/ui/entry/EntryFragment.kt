@@ -13,6 +13,7 @@ import com.example.pal.R
 import com.example.pal.databinding.FragmentEntryBinding
 import com.example.pal.ui.MainActivity
 import com.example.pal.ui.MainActivityViewModel
+
 import dagger.hilt.android.AndroidEntryPoint
 import il.co.syntax.fullarchitectureretrofithiltkotlin.utils.autoCleared
 

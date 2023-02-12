@@ -1,4 +1,4 @@
-package com.example.pal.ui.homeScreens.home
+package com.example.pal.ui.homeScreens.search.home
 
 import androidx.lifecycle.*
 import com.example.pal.data.models.Pet
