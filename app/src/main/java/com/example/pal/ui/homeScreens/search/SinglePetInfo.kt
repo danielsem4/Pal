@@ -1,5 +1,6 @@
 package com.example.pal.ui.homeScreens.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.pal.R
 import com.example.pal.data.models.Cat
@@ -42,13 +44,18 @@ class SinglePetInfo : Fragment() {
         binding = FragmentSinglePetInfoBinding.inflate(inflater, container, false)
         activityViewModel
 
-        // the bottom menu ref, and set the manu to be visible every time we come back to this screen
+//      the back button
+        binding.backIcon.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        // the bottom menu ref,
+        // and set the manu to be visible every time we come back to this screen
         val navigationBar =
             (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = false
 
         return binding.root
-
 
     }
 
@@ -61,11 +68,10 @@ class SinglePetInfo : Fragment() {
         if (activityViewModel.petType == "Dog") {
             viewModel.dog.observe(viewLifecycleOwner) {
 
-                when(it.status) {
+                when (it.status) {
 
                     is Loading -> {
                         binding.infoPage.isVisible = false
-
                     }
 
                     is Success -> {
@@ -77,7 +83,8 @@ class SinglePetInfo : Fragment() {
 
                     is Error -> {
                         binding.infoPage.isVisible = true
-                        Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT)
+                            .show()
                     }
                     else -> {}
                 }
@@ -85,11 +92,10 @@ class SinglePetInfo : Fragment() {
         } else {
             viewModel.cat.observe(viewLifecycleOwner) {
 
-                when(it.status) {
+                when (it.status) {
 
                     is Loading -> {
                         binding.infoPage.isVisible = false
-
                     }
 
                     is Success -> {
@@ -101,13 +107,13 @@ class SinglePetInfo : Fragment() {
 
                     is Error -> {
                         binding.infoPage.isVisible = true
-                        Toast.makeText(requireContext(),it.status.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT)
+                            .show()
                     }
                     else -> {}
                 }
             }
         }
-
 
         arguments?.getString("breed")?.let {
             viewModel.setBreed(it, activityViewModel.petType)
@@ -155,8 +161,35 @@ class SinglePetInfo : Fragment() {
     }
 
     // update the dog breed info
+    @SuppressLint("SetTextI18n")
     private fun updateCat(cat: Cat, parameters: Array<String>) {
 
+        binding.breedDescribe.text = cat.name
+        binding.weightDescribe.text = "${cat.max_weight} - ${cat.min_weight}"
+        binding.lifeSpanDescribe.text = "${cat.max_life_expectancy} - ${cat.min_life_expectancy}"
+
+        binding.sheddingRatingBar.Parameters.text = parameters[0]
+        binding.sheddingRatingBar.ratingBar.rating = cat.shedding.toFloat()
+
+        binding.otherPetsFriendlyRatingBar.Parameters.text = parameters[1]
+        binding.otherPetsFriendlyRatingBar.ratingBar.rating = cat.other_pets_friendly.toFloat()
+
+        binding.childrenFriendlyRatingBar.Parameters.text = parameters[2]
+        binding.childrenFriendlyRatingBar.ratingBar.rating = cat.children_friendly.toFloat()
+
+        binding.playfulnessRatingBar.Parameters.text = parameters[9]
+        binding.playfulnessRatingBar.ratingBar.rating = cat.playfulness.toFloat()
+
+        binding.groomingRatingBar.Parameters.text = parameters[10]
+        binding.groomingRatingBar.ratingBar.rating = cat.grooming.toFloat()
+
+        binding.meowingRatingBar.Parameters.text = parameters[11]
+        binding.meowingRatingBar.ratingBar.rating = cat.meowing.toFloat()
+
+        binding.generalHealthRatingBar.Parameters.text = parameters[12]
+        binding.generalHealthRatingBar.ratingBar.rating = cat.general_health.toFloat()
+
+        Glide.with(requireContext()).load(cat.image_link).circleCrop().into(binding.petImage)
 
     }
 

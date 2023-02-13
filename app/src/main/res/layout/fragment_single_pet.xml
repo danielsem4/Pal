@@ -15,6 +15,16 @@
         android:background="@color/coffee"
         android:gravity="center">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backIcon"
+            android:contentDescription="@string/backicon"
+            android:src="@drawable/backicon"
+            android:background="@color/coffee"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,6 +43,7 @@
             android:id="@+id/id"
             android:text=""
             android:visibility="gone"/>
+
 
     </LinearLayout>
 

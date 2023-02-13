@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.pal.R
 import com.example.pal.data.models.Pet
@@ -40,6 +41,11 @@ class SinglePet : Fragment() {
 
         binding.guest.isVisible = !activityViewModel.userStatus
         binding.favorites.isVisible = activityViewModel.userStatus
+
+//      the back button
+        binding.backIcon.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         // the bottom menu ref, and set the manu to be visible every time we come back to this screen
         val navigationBar =

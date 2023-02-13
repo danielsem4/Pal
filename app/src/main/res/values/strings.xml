@@ -65,6 +65,8 @@
         <item>Intelligence</item>
         <item>Playfulness</item>
         <item>Grooming</item>
+        <item>Meowing</item>
+        <item>General Health</item>
     </string-array>
 
     <string-array name="settings">
@@ -151,5 +153,12 @@
     <string name="Contact_Us">Contact Us</string>
     <string name="Terms_Contact_Us_one_OutOf_Two">If you have any questions about these Terms and Conditions, You can contact us:</string>
     <string name="Terms_Contact_Us_two_OutOf_Two">By email: palpa2245@gmail.com</string>
+    <string name="info">Info</string>
+    <string name="submit">submit</string>
+    <string name="your_message">Your Message</string>
+    <string name="your_email">Your Email</string>
+    <string name="your_name">Your Name</string>
+    <string name="or_with">Or With</string>
+    <string name="please_enter_your_email_to_reset_you_password">Please enter your email to reset you password</string>
 
 </resources>

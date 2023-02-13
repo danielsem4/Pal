@@ -53,7 +53,6 @@ class SettingsFragment : Fragment() {
 
 
         // set the buttons that will appear always in this page
-
         binding.settingsTerms.settingsBtnText.text = settingsButtonsNames[1]
         binding.settingsContactUs.settingsBtnText.text = settingsButtonsNames[0]
 
@@ -84,14 +83,10 @@ class SettingsFragment : Fragment() {
             navigationBar.isVisible = false
         }
 
-
         binding.user.isVisible = activityViewModel.userStatus
         binding.guest.isVisible = !activityViewModel.userStatus
 
-        println(activityViewModel.userStatus)
-
         // check the user status to initialize the necessary buttons
-
         // check if the user is logged in
         if (activityViewModel.userStatus) {
 
@@ -131,7 +126,11 @@ class SettingsFragment : Fragment() {
 
             // delete user button
             binding.settingsDeleteUser.settingsBtn.setOnClickListener {
-
+                Toast.makeText(
+                    context,
+                    "We are working on it, contact us to delete the user",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
             // sign out button
@@ -144,7 +143,6 @@ class SettingsFragment : Fragment() {
 
         } else {
             // if the user is in guest mode
-
             binding.settingsLogIn.settingsBtnText.text = settingsButtonsNames[5]
 
             // Log in
@@ -158,7 +156,6 @@ class SettingsFragment : Fragment() {
                 findNavController().navigate(R.id.action_SettingsFragment_to_loginFragment)
             }
         }
-
 
         return binding.root
     }

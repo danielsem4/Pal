@@ -15,7 +15,7 @@ class MainActivityViewModel @Inject constructor(private val repository: AuthRepo
     // the user status
     var userStatus: Boolean = false
 
-    lateinit var userFavorites: List<String>
+    var userFavorites: List<String> = emptyList()
 
     // the pet type Dog/Cat
     var petType: String = ""
