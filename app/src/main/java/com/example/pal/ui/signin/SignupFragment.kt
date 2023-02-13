@@ -80,12 +80,19 @@ class SignupFragment : Fragment() {
                 }
 
                 // if the user status is failed we will pop up the message and wont change the ui
-                is Error -> {
-                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
+                else -> {
+                    if (activityViewModel.checkForInternet(requireContext())) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Make sure the email is valid, and the password in at least 6 digits",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Network error", Toast.LENGTH_SHORT).show()
+                    }
                     binding.signUpUi.isVisible = true
                     binding.signUpLoading.isVisible = false
                 }
-                else -> {}
             }
         }
     }

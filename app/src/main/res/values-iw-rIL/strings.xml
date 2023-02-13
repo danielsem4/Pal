@@ -148,5 +148,13 @@
     <string name="age">גיל</string>
     <string name="hello_blank_fragment">.</string>
     <string name="more_info">מידע נוסף..</string>
+    <string name="add_to_favorites">הוסף למועדפים</string>
+    <string name="info">מידע</string>
+    <string name="submit">אשר</string>
+    <string name="your_message">ההודעה שלך</string>
+    <string name="your_email">הדו\"אל שלך</string>
+    <string name="your_name">השם שלך</string>
+    <string name="or_with">או בעזרת</string>
+    <string name="please_enter_your_email_to_reset_you_password">אנא הכנס את הדו\"אל האלקטרוני שלך על מנת לשחזר את הסיסמא</string>
 
 </resources>
