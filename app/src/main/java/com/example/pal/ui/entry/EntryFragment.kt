@@ -38,6 +38,11 @@ class EntryFragment : Fragment() {
             (activity as MainActivity).findViewById<ViewGroup>(R.id.bottom_navigation)
         navigationBar.isVisible = false
 
+        // the back button
+        binding.backIcon.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         // on press moving to the dog section (Home screen with dogs for adoption)
         binding.dogSection.setOnClickListener {
 

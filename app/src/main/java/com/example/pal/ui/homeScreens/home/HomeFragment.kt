@@ -59,6 +59,10 @@ class HomeFragment : Fragment() {
         imageList.add(SlideModel(R.drawable.home_slider5, galleryDescription))
         imageList.add(SlideModel(R.drawable.home_slider6, galleryDescription))
 
+        binding.backIcon.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         // fill the home slider with the images
         binding.imageHomeSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
 

@@ -16,7 +16,7 @@ abstract class BaseDataSource {
             }
             return Resource.error("Network call has failed for the following reason: " +
                     "${result.message()} ${result.code()}")
-        }catch (e : Exception) {
+        } catch (e : Exception) {
             return Resource.error("Network call has failed for the following reason: "
              + (e.localizedMessage ?: e.toString()))
         }

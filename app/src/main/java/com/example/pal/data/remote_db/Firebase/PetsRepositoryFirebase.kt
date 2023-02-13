@@ -59,18 +59,18 @@ class PetsRepositoryFirebase @Inject constructor(private val firebaseAuth: Fireb
 
         if (language == "iw")
             petsRef = FirebaseFirestore.getInstance().collection("petsHW")
-
+        val petsList = mutableListOf<Pet>()
         return withContext(Dispatchers.IO) {
+            if (ids.isNotEmpty()) {
+                for (id in ids) {
+                    val query = petsRef.whereEqualTo("id", id.toInt())
+                    println(id)
+                    val snapshot = query.get().await()
 
-            val petsList = mutableListOf<Pet>()
-            for (id in ids) {
-                val query = petsRef.whereEqualTo("id", id.toInt())
-                println(id)
-                val snapshot = query.get().await()
+                    val pet = snapshot.documents[0].toObject(Pet::class.java)
+                    petsList.add(pet!!)
 
-                val pet = snapshot.documents[0].toObject(Pet::class.java)
-                petsList.add(pet!!)
-
+                }
             }
             petsList
         }
