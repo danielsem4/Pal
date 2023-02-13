@@ -72,7 +72,8 @@ class SearchFragment : Fragment() {
 
                     findNavController().navigate(
                         R.id.action_searchFragment_to_singlePetInfo,
-                        bundleOf("breed" to breed))
+                        bundleOf("breed" to breed)
+                    )
                 }
             }, null, activityViewModel.petType)
 
@@ -93,13 +94,12 @@ class SearchFragment : Fragment() {
                         (binding.searchRecycler.adapter as SearchAdapter).setDogs(it.status.data!!)
                     }
 
-                    is Error -> {
-                        Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT).show()
+                    else -> {
+                        Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT)
+                            .show()
                         binding.searchLoading.isVisible = false
                         binding.searchPage.isVisible = false
                     }
-
-                    else -> {}
                 }
             }
 
@@ -111,7 +111,8 @@ class SearchFragment : Fragment() {
 
                         findNavController().navigate(
                             R.id.action_searchFragment_to_singlePetInfo,
-                            bundleOf("breed" to breed))
+                            bundleOf("breed" to breed)
+                        )
                     }
                 }, activityViewModel.petType)
 
@@ -127,31 +128,21 @@ class SearchFragment : Fragment() {
                     is Success -> {
                         binding.searchPage.isVisible = true
                         binding.searchLoading.isVisible = false
-                        println(it.status.data)
-                        if(!it.status.data.isNullOrEmpty()) {
-                            (binding.searchRecycler.adapter as SearchAdapter).setCats(it.status.data!!)
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Error, no data sent\ntry again",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                        (binding.searchRecycler.adapter as SearchAdapter).setCats(it.status.data!!)
                     }
 
-                    is Error -> {
-                        Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT).show()
+                    else -> {
+                        Toast.makeText(requireContext(), "No such a breed", Toast.LENGTH_SHORT)
+                            .show()
                         binding.searchLoading.isVisible = false
                         binding.searchPage.isVisible = false
                     }
-
-                    else -> {}
                 }
             }
         }
 
 
-        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
 

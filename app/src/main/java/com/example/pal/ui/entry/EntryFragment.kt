@@ -24,7 +24,6 @@ class EntryFragment : Fragment() {
 
     private val activityViewModel: MainActivityViewModel by activityViewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,9 +57,6 @@ class EntryFragment : Fragment() {
             activityViewModel.setAnimalType("Cat")
             findNavController().navigate(R.id.action_entryFragment_to_homeFragment)
         }
-
         return binding.root
-
     }
-
 }

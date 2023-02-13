@@ -1,10 +1,15 @@
 package com.example.pal.ui.signin
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -47,6 +52,10 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_entryFragment)
         }
 
+        binding.forgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_changePasswordFragment)
+        }
+
         // users without account will press here and move to the sign up page
         binding.signupBtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
@@ -65,6 +74,7 @@ class LoginFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -75,7 +85,6 @@ class LoginFragment : Fragment() {
                 is Loading -> {
                     binding.loginUi.isVisible = false
                     binding.loginLoading.isVisible = true
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
 
                 // when the user status is success we will move to the next page and reset the ui
@@ -89,12 +98,17 @@ class LoginFragment : Fragment() {
                 }
 
                 // if the user status is failed we will pop up the message and wont change the ui
-                is Error -> {
-                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
+                else -> {
+
+                    if(activityViewModel.checkForInternet(requireContext())) {
+                        Toast.makeText(requireContext(), "Email or Password are wrong", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Network error", Toast.LENGTH_SHORT).show()
+                    }
+
                     binding.loginUi.isVisible = true
                     binding.loginLoading.isVisible = false
                 }
-                else -> {}
             }
         }
 
@@ -110,4 +124,5 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
 }

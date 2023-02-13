@@ -59,15 +59,15 @@ class SinglePet : Fragment() {
             binding.checkboxFavorites.setOnCheckedChangeListener { checkBox, isChecked ->
 
                 if (isChecked) {
-                    activityViewModel.updateFavorites(binding.id.text.toString())
-                    Toast.makeText(
-                        requireContext(),
-                        "Pet added to your favorites",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                else {
+                    if (checkBox.isPressed) {
+                        activityViewModel.updateFavorites(binding.id.text.toString())
+                        Toast.makeText(
+                            requireContext(),
+                            "Pet added to your favorites",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else {
                     activityViewModel.removePetFromFavorites(binding.id.text.toString())
                     Toast.makeText(
                         requireContext(),
@@ -87,17 +87,24 @@ class SinglePet : Fragment() {
 
         viewModel.pet.observe(viewLifecycleOwner) {
             when (it.status) {
-                //we need to add here instead the progress bar
-                is Loading -> Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
+
+                is Loading -> {
+                    binding.homeLoading.isVisible = true
+                    binding.guest.isVisible = false
+                    binding.favorites.isVisible = false
+                }
 
                 is Success -> {
+                    binding.homeLoading.isVisible = false
+                    binding.guest.isVisible = !activityViewModel.userStatus
+                    binding.favorites.isVisible = activityViewModel.userStatus
                     updatePet(it.status.data!!)//send to this function the pet to update the detail
                 }
-                is Error -> {
-                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
+                else -> {
+                    binding.homeLoading.isVisible = false
+                    binding.guest.isVisible = !activityViewModel.userStatus
+                    binding.favorites.isVisible = activityViewModel.userStatus
                 }
-
-                else -> {}
             }
         }
         // getting the id of the pet after we pressed the recycler view item
@@ -127,6 +134,5 @@ class SinglePet : Fragment() {
                 }
             }
         }
-
     }
 }
